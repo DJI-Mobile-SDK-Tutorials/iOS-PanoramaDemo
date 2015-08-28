@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>28464A46-298B-48A3-9F37-3AAD3EDB26D1</string>
+	<key>IDESourceControlProjectName</key>
+	<string>PanoDemo</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>22259328A86C14721C98810D95E3477A0F4DCE06</key>
+		<string>github.com:DJI-Mobile-SDK/iOS-PanoramaDemo.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>PanoDemo.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>22259328A86C14721C98810D95E3477A0F4DCE06</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>github.com:DJI-Mobile-SDK/iOS-PanoramaDemo.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>22259328A86C14721C98810D95E3477A0F4DCE06</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>22259328A86C14721C98810D95E3477A0F4DCE06</string>
+			<key>IDESourceControlWCCName</key>
+			<string>iOS-PanoramaDemo</string>
+		</dict>
+	</array>
+</dict>
+</plist>
