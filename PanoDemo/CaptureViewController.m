@@ -202,11 +202,11 @@
             weakSelf.uploadMissionProgressAlert = nil;
         }
         [weakSelf.waypointMission setUploadProgressHandler:nil];
-        [self startWaypoingMission];
+        [self startWaypointMission];
     }];
 }
 
-- (void)startWaypoingMission {
+- (void)startWaypointMission {
     [self.waypointMission startMissionWithResult:^(DJIError *error) {
         self.isMissionStarted = YES;
         UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Start Mission" message:[NSString stringWithFormat:@"%@", error.errorDescription] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
@@ -371,7 +371,6 @@
 -(void) droneOnConnectionStatusChanged:(DJIConnectionStatus)status {
     if (status == ConnectionSuccessed) {
         NSLog(@"Connection Successed");
-        [_camera setCameraWorkMode:CameraWorkModeCapture withResult:nil];
     } else if(status == ConnectionStartConnect) {
         NSLog(@"Start Reconnect");
     } else if(status == ConnectionBroken) {
