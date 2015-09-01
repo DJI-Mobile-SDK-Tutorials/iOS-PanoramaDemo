@@ -14,15 +14,13 @@
 #define ROTATE_ANGLE 45
 #define kCaptureModeAlertTag 100
 
-#define GIMBAL_ROTATE_BUG 
-
-
 @interface CaptureViewController ()<DJIAppManagerDelegate, DJICameraDelegate, DJIDroneDelegate, DJIMainControllerDelegate, DJINavigationDelegate>{
     __block NSMutableData* _downloadedFileData;
     __block int _selectedPhotoNumber;
     __block long _totalFileSize;
     __block NSString* _targetFileName;
 }
+
 @property (strong, nonatomic) DJIDrone* drone;
 @property (strong, nonatomic) DJIInspireCamera* camera;
 @property (weak, nonatomic) NSObject<DJINavigation>* navigation;
@@ -124,7 +122,46 @@
             [alertView show];
         });
     });
+}
+
+- (void)rotateGimbal {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+
+        //Reset Gimbal at the beginning
+        [_gimbal resetGimbalWithResult:^(DJIError *error) {
+            if (error.errorCode != ERR_Successed) {
+                UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"resetGimbal Failed" message:@"" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                [alertView show];
+            }
+        }];
+        sleep(4);
+
+        //rotate the gimbal clockwise
+        float yawAngle = 0;
+        DJIGimbalRotation pitch = {YES, 0, AbsoluteAngle, RotationForward};
+        DJIGimbalRotation roll = {YES, 0, AbsoluteAngle, RotationForward};
+        DJIGimbalRotation yaw = {YES, yawAngle, AbsoluteAngle, RotationForward};
+        
+        [_gimbal setGimbalPitch:pitch Roll:roll Yaw:yaw withResult:nil];
+        sleep(2);
     
+        [_camera startTakePhoto:CameraSingleCapture withResult:nil];
+        sleep(2);
+    
+        for(int i = 0; i < PHOTO_NUMBER - 1; i++){
+            yawAngle += ROTATE_ANGLE;
+            yaw.angle = yawAngle;
+            [_gimbal setGimbalPitch:pitch Roll:roll Yaw:yaw withResult:nil];
+            sleep(2);
+            [_camera startTakePhoto:CameraSingleCapture withResult:nil];
+            sleep(2);
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Capture Photos" message:@"Capture finished" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alertView show];
+        });
+    });
 }
 
 - (void) warmingUp {
@@ -304,10 +341,9 @@
 
 -(IBAction)onCaptureButtonClicked:(id)sender {
 
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Select Mode" message:@"" delegate:self cancelButtonTitle:@"GroundStation" otherButtonTitles:@"Joystick", nil];
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Select Mode" message:@"" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Joystick_Aircraft", @"Joystick_Gimbal", @"GroundStation", nil];
     alertView.tag = kCaptureModeAlertTag;
     [alertView show];
-    
 }
 
 -(IBAction)onDownloadButtonClicked:(id)sender {
@@ -326,10 +362,12 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (alertView.tag == kCaptureModeAlertTag) {
-        if (buttonIndex == 0){
-            [self rotateDroneWithGoundStation];
-        }else if(buttonIndex == 1){
+        if(buttonIndex == 1){
             [self rotateDroneWithJoystick];
+        }else if(buttonIndex == 2){
+            [self rotateGimbal];
+        }else if (buttonIndex == 3){
+            [self rotateDroneWithGoundStation];
         }
     }
 }

@@ -11,7 +11,6 @@
 #import "OpenCVConversion.h"
 #import "Cropping.h"
 
-
 @implementation StitchingViewController
 
 - (void)viewDidLoad {
