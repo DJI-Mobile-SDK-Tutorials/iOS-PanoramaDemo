@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>F0ABCD27-E1A6-46BA-AB6D-BB9494992369</string>
 	<key>IDESourceControlProjectName</key>
-	<string>PanoDemo</string>
+	<string>project</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>22259328A86C14721C98810D95E3477A0F4DCE06</key>
 		<string>github.com:DJI-Mobile-SDK/iOS-PanoramaDemo.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>PanoDemo.xcodeproj</string>
+	<string>PanoDemo.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>22259328A86C14721C98810D95E3477A0F4DCE06</key>
