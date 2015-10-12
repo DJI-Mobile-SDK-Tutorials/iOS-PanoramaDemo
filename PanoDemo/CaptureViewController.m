@@ -129,7 +129,7 @@
 
         //Reset Gimbal at the beginning
         [_gimbal resetGimbalWithResult:^(DJIError *error) {
-            if (error.errorCode != ERR_Successed) {
+            if (error.errorCode != ERR_Succeeded) {
                 UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"resetGimbal Failed" message:@"" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
                 [alertView show];
             }
@@ -349,7 +349,7 @@
 -(IBAction)onDownloadButtonClicked:(id)sender {
     __weak typeof(self) weakSelf = self;
     [_camera setCameraWorkMode:CameraWorkModePlayback withResult:^(DJIError *error) {
-        if (error.errorCode == ERR_Successed) {
+        if (error.errorCode == ERR_Succeeded) {
             [weakSelf selectPhotos];
         }else {
             UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Camera WorkMode" message:@"Enter playback mode failed" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
@@ -407,8 +407,8 @@
 
 #pragma mark - DJIDroneDelegate Method
 -(void) droneOnConnectionStatusChanged:(DJIConnectionStatus)status {
-    if (status == ConnectionSuccessed) {
-        NSLog(@"Connection Successed");
+    if (status == ConnectionSucceeded) {
+        NSLog(@"Connection Succeeded");
     } else if(status == ConnectionStartConnect) {
         NSLog(@"Start Reconnect");
     } else if(status == ConnectionBroken) {
