@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "22259328A86C14721C98810D95E3477A0F4DCE06",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "F242303504B8CDD3CE213C5B3FFB052B596793AF" : 0,
+    "22259328A86C14721C98810D95E3477A0F4DCE06" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "F0ABCD27-E1A6-46BA-AB6D-BB9494992369",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "F242303504B8CDD3CE213C5B3FFB052B596793AF" : "",
+    "22259328A86C14721C98810D95E3477A0F4DCE06" : "iOS-PanoramaDemo\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "PanoDemo",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "PanoDemo.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:DJI-Mobile-SDK\/iOS-PanoramaDemo.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "22259328A86C14721C98810D95E3477A0F4DCE06"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/oliver.ou@us003.fly-access.com\/scm\/msdk\/documentation.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "F242303504B8CDD3CE213C5B3FFB052B596793AF"
+    }
+  ]
+}

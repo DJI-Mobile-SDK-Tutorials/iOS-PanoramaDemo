@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A48F79C51C5F59EF00654B9D /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A48F79C41C5F59EF00654B9D /* libiconv.tbd */; };
+		A48F79C71C5F5A0200654B9D /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A48F79C61C5F5A0100654B9D /* libstdc++.6.0.9.tbd */; };
+		A48F79C91C5F5A1600654B9D /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A48F79C81C5F5A1600654B9D /* libz.tbd */; };
+		A48F79CB1C5F5A3E00654B9D /* DJISDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B349F8AC1B6883A400B5FEA6 /* DJISDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A4FE15851B8EEF1500C58EB3 /* Cropping.mm in Sources */ = {isa = PBXBuildFile; fileRef = A4FE157E1B8EEF1500C58EB3 /* Cropping.mm */; };
 		A4FE15861B8EEF1500C58EB3 /* OpenCVConversion.mm in Sources */ = {isa = PBXBuildFile; fileRef = A4FE15801B8EEF1500C58EB3 /* OpenCVConversion.mm */; };
 		A4FE15871B8EEF1500C58EB3 /* Stitching.mm in Sources */ = {isa = PBXBuildFile; fileRef = A4FE15821B8EEF1500C58EB3 /* Stitching.mm */; };
@@ -18,8 +22,6 @@
 		B349F88C1B68804900B5FEA6 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B349F88A1B68804900B5FEA6 /* LaunchScreen.xib */; };
 		B349F8981B68804A00B5FEA6 /* PanoDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B349F8971B68804A00B5FEA6 /* PanoDemoTests.m */; };
 		B349F8A61B68816600B5FEA6 /* CaptureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B349F8A51B68816600B5FEA6 /* CaptureViewController.m */; };
-		B349F8A81B68819600B5FEA6 /* libstdc++.6.0.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B349F8A71B68819600B5FEA6 /* libstdc++.6.0.9.dylib */; };
-		B349F8AA1B6881C600B5FEA6 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B349F8A91B6881C600B5FEA6 /* libz.dylib */; };
 		B349F8AD1B6883A400B5FEA6 /* DJISDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B349F8AC1B6883A400B5FEA6 /* DJISDK.framework */; };
 		B349F91C1B68854800B5FEA6 /* DJILinkQueues.m in Sources */ = {isa = PBXBuildFile; fileRef = B349F8B61B68854800B5FEA6 /* DJILinkQueues.m */; };
 		B349F91D1B68854800B5FEA6 /* libavcodec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B349F90D1B68854800B5FEA6 /* libavcodec.a */; };
@@ -34,7 +36,6 @@
 		B349F9261B68854900B5FEA6 /* MovieGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = B349F9171B68854800B5FEA6 /* MovieGLView.m */; };
 		B349F9271B68854900B5FEA6 /* VideoFrameExtractor.m in Sources */ = {isa = PBXBuildFile; fileRef = B349F9191B68854800B5FEA6 /* VideoFrameExtractor.m */; };
 		B349F9281B68854900B5FEA6 /* VideoPreviewer.m in Sources */ = {isa = PBXBuildFile; fileRef = B349F91B1B68854800B5FEA6 /* VideoPreviewer.m */; };
-		B349F92A1B68856E00B5FEA6 /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B349F9291B68856E00B5FEA6 /* libiconv.dylib */; };
 		B349F9BC1B69F96700B5FEA6 /* StitchingViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = B349F9BB1B69F96700B5FEA6 /* StitchingViewController.mm */; };
 		B349F9BE1B6A10E200B5FEA6 /* opencv2.framework in Resources */ = {isa = PBXBuildFile; fileRef = B349F9BD1B6A10E200B5FEA6 /* opencv2.framework */; };
 		B349F9BF1B6A11A300B5FEA6 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B349F9BD1B6A10E200B5FEA6 /* opencv2.framework */; };
@@ -52,7 +53,24 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		A48F79CC1C5F5A3E00654B9D /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				A48F79CB1C5F5A3E00654B9D /* DJISDK.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		A48F79C41C5F59EF00654B9D /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
+		A48F79C61C5F5A0100654B9D /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
+		A48F79C81C5F5A1600654B9D /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		A4FE157D1B8EEF1500C58EB3 /* Cropping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cropping.h; sourceTree = "<group>"; };
 		A4FE157E1B8EEF1500C58EB3 /* Cropping.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Cropping.mm; sourceTree = "<group>"; };
 		A4FE157F1B8EEF1500C58EB3 /* OpenCVConversion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenCVConversion.h; sourceTree = "<group>"; };
@@ -74,8 +92,6 @@
 		B349F8971B68804A00B5FEA6 /* PanoDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PanoDemoTests.m; sourceTree = "<group>"; };
 		B349F8A41B68816600B5FEA6 /* CaptureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaptureViewController.h; sourceTree = "<group>"; };
 		B349F8A51B68816600B5FEA6 /* CaptureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaptureViewController.m; sourceTree = "<group>"; };
-		B349F8A71B68819600B5FEA6 /* libstdc++.6.0.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.0.9.dylib"; path = "usr/lib/libstdc++.6.0.9.dylib"; sourceTree = SDKROOT; };
-		B349F8A91B6881C600B5FEA6 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		B349F8AC1B6883A400B5FEA6 /* DJISDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DJISDK.framework; path = PanoDemo/DJISDK.framework; sourceTree = "<group>"; };
 		B349F8B51B68854800B5FEA6 /* DJILinkQueues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DJILinkQueues.h; sourceTree = "<group>"; };
 		B349F8B61B68854800B5FEA6 /* DJILinkQueues.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DJILinkQueues.m; sourceTree = "<group>"; };
@@ -168,7 +184,6 @@
 		B349F9191B68854800B5FEA6 /* VideoFrameExtractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoFrameExtractor.m; sourceTree = "<group>"; };
 		B349F91A1B68854800B5FEA6 /* VideoPreviewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoPreviewer.h; sourceTree = "<group>"; };
 		B349F91B1B68854800B5FEA6 /* VideoPreviewer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoPreviewer.m; sourceTree = "<group>"; };
-		B349F9291B68856E00B5FEA6 /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
 		B349F9BA1B69F96700B5FEA6 /* StitchingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StitchingViewController.h; sourceTree = "<group>"; };
 		B349F9BB1B69F96700B5FEA6 /* StitchingViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = StitchingViewController.mm; sourceTree = "<group>"; };
 		B349F9BD1B6A10E200B5FEA6 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
@@ -182,20 +197,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A48F79C91C5F5A1600654B9D /* libz.tbd in Frameworks */,
+				A48F79C71C5F5A0200654B9D /* libstdc++.6.0.9.tbd in Frameworks */,
+				A48F79C51C5F59EF00654B9D /* libiconv.tbd in Frameworks */,
 				B349F9C41B6A20B200B5FEA6 /* CoreGraphics.framework in Frameworks */,
 				B349F9C11B6A11D800B5FEA6 /* AssetsLibrary.framework in Frameworks */,
 				B349F9BF1B6A11A300B5FEA6 /* opencv2.framework in Frameworks */,
-				B349F92A1B68856E00B5FEA6 /* libiconv.dylib in Frameworks */,
 				B349F9251B68854900B5FEA6 /* libswscale.a in Frameworks */,
 				B349F9221B68854900B5FEA6 /* libavutil.a in Frameworks */,
 				B349F91F1B68854900B5FEA6 /* libavfilter.a in Frameworks */,
 				B349F91E1B68854900B5FEA6 /* libavdevice.a in Frameworks */,
 				B349F9201B68854900B5FEA6 /* libavformat.a in Frameworks */,
 				B349F8AD1B6883A400B5FEA6 /* DJISDK.framework in Frameworks */,
-				B349F8AA1B6881C600B5FEA6 /* libz.dylib in Frameworks */,
 				B349F9211B68854900B5FEA6 /* libavresample.a in Frameworks */,
 				B349F9231B68854900B5FEA6 /* libpostproc.a in Frameworks */,
-				B349F8A81B68819600B5FEA6 /* libstdc++.6.0.9.dylib in Frameworks */,
 				B349F9241B68854900B5FEA6 /* libswresample.a in Frameworks */,
 				B349F91D1B68854800B5FEA6 /* libavcodec.a in Frameworks */,
 			);
@@ -293,10 +308,10 @@
 			children = (
 				B349F9C31B6A20B200B5FEA6 /* CoreGraphics.framework */,
 				B349F9C01B6A11D800B5FEA6 /* AssetsLibrary.framework */,
-				B349F9291B68856E00B5FEA6 /* libiconv.dylib */,
+				A48F79C41C5F59EF00654B9D /* libiconv.tbd */,
 				B349F8AC1B6883A400B5FEA6 /* DJISDK.framework */,
-				B349F8A71B68819600B5FEA6 /* libstdc++.6.0.9.dylib */,
-				B349F8A91B6881C600B5FEA6 /* libz.dylib */,
+				A48F79C61C5F5A0100654B9D /* libstdc++.6.0.9.tbd */,
+				A48F79C81C5F5A1600654B9D /* libz.tbd */,
 			);
 			name = Frameworks;
 			path = ..;
@@ -526,6 +541,7 @@
 				B349F8741B68804900B5FEA6 /* Sources */,
 				B349F8751B68804900B5FEA6 /* Frameworks */,
 				B349F8761B68804900B5FEA6 /* Resources */,
+				A48F79CC1C5F5A3E00654B9D /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -775,6 +791,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/PanoDemo/VideoPreviewer/ffmpeg/lib",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.dji.panoDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -802,6 +819,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/PanoDemo/VideoPreviewer/ffmpeg/lib",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.dji.panoDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

@@ -2,7 +2,7 @@
 //  StitchingViewController.mm
 //  PanoDemo
 //
-//  Created by lizefei on 15/7/30.
+//  Created by DJI on 15/7/30.
 //  Copyright (c) 2015年 DJI. All rights reserved.
 //
 
@@ -34,9 +34,9 @@
         UIImage *stitchImage=[OpenCVConversion UIImageFromCVMat:cropedMat];
         UIImageWriteToSavedPhotosAlbum(stitchImage, nil, nil, nil);
         
-        [weakSelf showAlertWithTitle:@"Save Photo Success" andMessage:@"Panoroma photo is saved to Album, please check it!"];
-        
         dispatch_async(dispatch_get_main_queue(), ^{
+            
+            [weakSelf showAlertWithTitle:@"Save Photo Success" andMessage:@"Panoroma photo is saved to Album, please check it!"];
             _imageView.image=stitchImage;
         });
     });

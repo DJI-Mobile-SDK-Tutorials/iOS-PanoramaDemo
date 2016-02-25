@@ -2,7 +2,7 @@
 //  Cropping.h
 //  PanoDemo
 //
-//  Created by lizefei on 15/7/31.
+//  Created by DJI on 15/7/31.
 //  Copyright (c) 2015年 DJI. All rights reserved.
 //
 
