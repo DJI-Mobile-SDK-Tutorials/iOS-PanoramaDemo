@@ -90,7 +90,7 @@ Also, implement the DJISDKManagerDelegate methods to do initial setup after regi
 
 - (void)sdkManagerDidRegisterAppWithError:(NSError *)error {
     
-    NSString* message = @"Register App Successed!";
+    NSString* message = @"Register App Successfully!";
     if (error) {
         message = @"Register App Failed! Please enter your App Key and check the network.";
     }else{
@@ -134,7 +134,7 @@ Also, implement the DJISDKManagerDelegate methods to do initial setup after regi
 
 **5.** Build and run the project on your mobile device, then connect your device to the aircraft. Now you can see view the camera's video stream on your device.
 
-![ffmpeg](./Images/viewFPVVideo.png)
+![ffmpeg](./Images/viewFPVView.png)
 
 ## Rotating with Virtual Stick
 
@@ -747,7 +747,7 @@ Now, let's implement the **DJIPlaybackDelegate** method as shown below to update
 }
 ~~~
 
-Here we set the DJICamera's cameraMode as **DJICameraModePlayback**. If it succeed, we can call the **selectPhotos** method to start selecting photos.
+Here we set the DJICamera's cameraMode as **DJICameraModePlayback**. If it succeeded, we can call the **selectPhotos** method to start selecting photos.
 
 **4**. Once it's done, let's implement the `selectPhotos` method to select the latest photos you capture for the panorama:
 

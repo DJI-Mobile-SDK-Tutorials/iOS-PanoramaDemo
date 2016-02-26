@@ -84,7 +84,7 @@
 
 - (void)sdkManagerDidRegisterAppWithError:(NSError *)error {
     
-    NSString* message = @"Register App Successed!";
+    NSString* message = @"Register App Successfully!";
     if (error) {
         message = @"Register App Failed! Please enter your App Key and check the network.";
     }else{
