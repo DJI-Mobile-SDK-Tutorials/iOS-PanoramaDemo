@@ -8,7 +8,7 @@
 
 #import "CaptureViewController.h"
 #import <DJISDK/DJISDK.h>
-#import "VideoPreviewer.h"
+#import <VideoPreviewer/VideoPreviewer.h>
 
 #define PHOTO_NUMBER 8
 #define ROTATE_ANGLE 45
@@ -19,7 +19,7 @@
 #define weakSelf(__TARGET__) __weak typeof(self) __TARGET__=self
 #define weakReturn(__TARGET__) if(__TARGET__==nil)return;
 
-@interface CaptureViewController ()<DJICameraDelegate, DJIPlaybackDelegate, DJISDKManagerDelegate, DJIMissionManagerDelegate, DJIFlightControllerDelegate>{
+@interface CaptureViewController ()<DJICameraDelegate, DJIPlaybackDelegate, DJISDKManagerDelegate, DJIMissionManagerDelegate, DJIFlightControllerDelegate, DJIBaseProductDelegate>{
     
 }
 
@@ -58,13 +58,30 @@
     }
 }
 
+#pragma mark - DJIBaseProductDelegate Method
+
+-(void) componentWithKey:(NSString *)key changedFrom:(DJIBaseComponent *)oldComponent to:(DJIBaseComponent *)newComponent {
+    
+    if ([key isEqualToString:DJICameraComponentKey] && newComponent != nil) {
+        __weak DJICamera* camera = [self fetchCamera];
+        if (camera) {
+            [camera setDelegate:self];
+            [camera.playbackManager setDelegate:self];
+        }
+    }
+}
+
 #pragma mark DJISDKManagerDelegate Methods
 - (void)sdkManagerProductDidChangeFrom:(DJIBaseProduct *)oldProduct to:(DJIBaseProduct *)newProduct
 {
-    DJICamera* camera = [self fetchCamera];
-    if (camera) {
-        [camera setDelegate:self];
-        [camera.playbackManager setDelegate:self];
+
+    if (newProduct) {
+        [newProduct setDelegate:self];
+        DJICamera* camera = [self fetchCamera];
+        if (camera != nil) {
+            camera.delegate = self;
+            [camera.playbackManager setDelegate:self];
+        }
     }
     
     [[DJIMissionManager sharedInstance] setDelegate:self];
@@ -91,7 +108,7 @@
         NSLog(@"registerAppSuccess");
 
 #if ENTER_DEBUG_MODE
-        [DJISDKManager enterDebugModeWithDebugId:@"10.81.0.29"];
+        [DJISDKManager enterDebugModeWithDebugId:@"192.168.1.109"];
 #else
         [DJISDKManager startConnectionToProduct];
 #endif
@@ -106,10 +123,7 @@
 #pragma mark - DJICameraDelegate Method
 -(void)camera:(DJICamera *)camera didReceiveVideoData:(uint8_t *)videoBuffer length:(size_t)size
 {
-    uint8_t* pBuffer = (uint8_t*)malloc(size);
-    memcpy(pBuffer, videoBuffer, size);
-    [[VideoPreviewer instance].dataQueue push:pBuffer length:(int)size];
-
+    [[VideoPreviewer instance] push:videoBuffer length:(int)size];
 }
 
 - (void)camera:(DJICamera *)camera didUpdateSystemState:(DJICameraSystemState *)systemState
@@ -197,7 +211,7 @@
 }
 
 - (void) registerApp {
-    NSString *appKey = @"Please enter your App Key here";
+    NSString *appKey = @"Please enter your App Key Here";
     [DJISDKManager registerApp:appKey withDelegate:self];
 }
 

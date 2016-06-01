@@ -14,7 +14,7 @@ You can download the demo project from this **Github Page**. If you want to have
 
 ## Implementing the FPV
 
-**1.** Import the DJI SDK and the FFMPEG decoding library. If you don't know how to do this please refer to the tutorial [How to create a Camera Application](https://github.com/DJI-Mobile-SDK/iOS-FPVDemo).
+**1.** Import the DJI SDK and the VideoPreviewer. If you don't know how to do this please refer to the tutorial [How to create a Camera Application](https://github.com/DJI-Mobile-SDK/iOS-FPVDemo).
 
 **2.** In the **Main.storyboard**, add a new View Controller called **CaptureViewController** and set it as the root View Controller for the new View Controller you just added in **Main.storyboard**:
 
@@ -35,12 +35,12 @@ Import the **DJISDK** and **VideoPreviewer** header files to **CaptureViewContro
 ~~~objc
 #import "CaptureViewController.h"
 #import <DJISDK/DJISDK.h>
-#import "VideoPreviewer.h"
+#import <VideoPreviewer/VideoPreviewer.h>
 
 #define weakSelf(__TARGET__) __weak typeof(self) __TARGET__=self
 #define weakReturn(__TARGET__) if(__TARGET__==nil)return;
 
-@interface CaptureViewController ()<DJICameraDelegate, DJISDKManagerDelegate>{
+@interface CaptureViewController ()<DJICameraDelegate, DJISDKManagerDelegate, DJIBaseProductDelegate>{
 
 ~~~
  
@@ -86,6 +86,19 @@ Also, implement the DJISDKManagerDelegate methods to do initial setup after regi
     return nil;
 }
 
+#pragma mark - DJIBaseProductDelegate Method
+
+-(void) componentWithKey:(NSString *)key changedFrom:(DJIBaseComponent *)oldComponent to:(DJIBaseComponent *)newComponent {
+    
+    if ([key isEqualToString:DJICameraComponentKey] && newComponent != nil) {
+        __weak DJICamera* camera = [self fetchCamera];
+        if (camera) {
+            [camera setDelegate:self];
+            [camera.playbackManager setDelegate:self];
+        }
+    }
+}
+
 #pragma mark DJISDKManagerDelegate Method
 
 - (void)sdkManagerDidRegisterAppWithError:(NSError *)error {
@@ -118,12 +131,9 @@ Also, implement the DJISDKManagerDelegate methods to do initial setup after regi
   
 ~~~objc
   
-#pragma mark - DJICameraDelegate Method
 -(void)camera:(DJICamera *)camera didReceiveVideoData:(uint8_t *)videoBuffer length:(size_t)size
 {
-    uint8_t* pBuffer = (uint8_t*)malloc(size);
-    memcpy(pBuffer, videoBuffer, size);
-    [[VideoPreviewer instance].dataQueue push:pBuffer length:(int)size];
+    [[VideoPreviewer instance] push:videoBuffer length:(int)size];
 }
 
 - (void)camera:(DJICamera *)camera didUpdateSystemState:(DJICameraSystemState *)systemState
@@ -430,7 +440,7 @@ It seems a bit inconvenient and odd to use `sleep(2)` between rotating the drone
 **1.** To use the DJIWaypointMission, firstly we should implement the **DJIMissionManagerDelegate** and **DJIFlightControllerDelegate** protocol in the class extension of **CaptureViewController.m** as shown below:
 
 ~~~objc
-@interface CaptureViewController ()<DJICameraDelegate, DJIPlaybackDelegate, DJISDKManagerDelegate, DJIMissionManagerDelegate, DJIFlightControllerDelegate>{
+@interface CaptureViewController ()<DJICameraDelegate, DJIPlaybackDelegate, DJISDKManagerDelegate, DJIMissionManagerDelegate, DJIFlightControllerDelegate, DJIBaseProductDelegate>{
     
 }
 ~~~
@@ -471,10 +481,14 @@ Moreover, initialize the **isMissionStarted** and **aircraftLocation** propertie
 #pragma mark DJISDKManagerDelegate Methods
 - (void)sdkManagerProductDidChangeFrom:(DJIBaseProduct *)oldProduct to:(DJIBaseProduct *)newProduct
 {
-    DJICamera* camera = [self fetchCamera];
-    if (camera) {
-        [camera setDelegate:self];
-        [camera.playbackManager setDelegate:self];
+
+    if (newProduct) {
+        [newProduct setDelegate:self];
+        DJICamera* camera = [self fetchCamera];
+        if (camera != nil) {
+            camera.delegate = self;
+            [camera.playbackManager setDelegate:self];
+        }
     }
     
     [[DJIMissionManager sharedInstance] setDelegate:self];
