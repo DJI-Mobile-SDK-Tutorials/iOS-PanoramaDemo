@@ -46,9 +46,19 @@
     
     self.isMissionStarted = NO;
     self.aircraftLocation = kCLLocationCoordinate2DInvalid;
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
     
     [[VideoPreviewer instance] setView:self.fpvPreviewView];
     [self registerApp];
+}
+
+- (void) registerApp {
+    NSString *appKey = @"Please enter your App Key here";
+    [DJISDKManager registerApp:appKey withDelegate:self];
 }
 
 //Pass the downloaded photos to StitchingViewController
@@ -74,7 +84,7 @@
 #pragma mark DJISDKManagerDelegate Methods
 - (void)sdkManagerProductDidChangeFrom:(DJIBaseProduct *)oldProduct to:(DJIBaseProduct *)newProduct
 {
-
+    
     if (newProduct) {
         [newProduct setDelegate:self];
         DJICamera* camera = [self fetchCamera];
@@ -106,18 +116,18 @@
         message = @"Register App Failed! Please enter your App Key and check the network.";
     }else{
         NSLog(@"registerAppSuccess");
-
+        
 #if ENTER_DEBUG_MODE
         [DJISDKManager enterDebugModeWithDebugId:@"192.168.1.109"];
 #else
         [DJISDKManager startConnectionToProduct];
 #endif
-
+        
         [[VideoPreviewer instance] start];
     }
     
     [self showAlertViewWithTitle:@"Register App" withMessage:message];
-
+    
 }
 
 #pragma mark - DJICameraDelegate Method
@@ -150,7 +160,7 @@
             self.isMissionStarted = NO;
         }
     }
-
+    
 }
 
 - (void)missionManager:(DJIMissionManager *)manager missionProgressStatus:(DJIMissionProgressStatus *)missionProgress
@@ -165,7 +175,7 @@
     self.gpsSignalStatus = state.gpsSignalStatus;
     self.aircraftAltitude = state.altitude;
     self.aircraftYaw = state.attitude.yaw;
-
+    
 }
 
 #pragma mark Custom Methods
@@ -210,11 +220,6 @@
     return nil;
 }
 
-- (void) registerApp {
-    NSString *appKey = @"Please enter your App Key Here";
-    [DJISDKManager registerApp:appKey withDelegate:self];
-}
-
 - (void)showAlertViewWithTitle:(NSString *)title withMessage:(NSString *)message
 {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
@@ -225,9 +230,9 @@
 
 #pragma mark - Rotate Drone With Joystick Methods
 - (void)rotateDroneWithJoystick {
-
+    
     weakSelf(target);
-
+    
     DJICamera *camera = [target fetchCamera];
     [camera setCameraMode:DJICameraModeShootPhoto withCompletion:^(NSError * _Nullable error) {
         weakReturn(target);
@@ -265,10 +270,10 @@
         sleep(2);
     }
     
-      dispatch_async(dispatch_get_main_queue(), ^{
-          [self showAlertViewWithTitle:@"Capture Photos" withMessage:@"Capture finished"];
-      });
-
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self showAlertViewWithTitle:@"Capture Photos" withMessage:@"Capture finished"];
+    });
+    
 }
 
 - (void)rotateDrone:(NSTimer *)timer
@@ -277,7 +282,7 @@
     float yawAngle = [[dict objectForKey:@"YawAngle"] floatValue];
     
     DJIFlightController *flightController = [self fetchFlightController];
-
+    
     DJIVirtualStickFlightControlData vsFlightCtrlData;
     vsFlightCtrlData.pitch = 0;
     vsFlightCtrlData.roll = 0;
@@ -289,7 +294,7 @@
             NSLog(@"Send FlightControl Data Failed %@", error.description);
         }
     }];
-
+    
 }
 
 #pragma mark - Rotate Gimbal Methods
@@ -305,7 +310,7 @@
             });
         }
     }];
-
+    
 }
 
 - (void)executeRotateGimbal
@@ -378,7 +383,7 @@
         if (rotateAngle > 180) { //Filter the angle between -180 ~ 0, 0 ~ 180
             rotateAngle = rotateAngle - 360;
         }
-
+        
         DJIWaypointAction *action1 = [[DJIWaypointAction alloc] initWithActionType:DJIWaypointActionTypeShootPhoto param:0];
         DJIWaypointAction *action2 = [[DJIWaypointAction alloc] initWithActionType:DJIWaypointActionTypeRotateAircraft param:rotateAngle];
         [wp1 addAction:action1];
@@ -387,7 +392,7 @@
     
     DJIWaypoint *wp2 = [[DJIWaypoint alloc] initWithCoordinate:self.aircraftLocation];
     wp2.altitude = self.aircraftAltitude + 1;
-
+    
     [mission addWaypoint:wp1];
     [mission addWaypoint:wp2];
     [mission setFinishedAction:DJIWaypointMissionFinishedNoAction]; //Change the default action of Go Home to None
@@ -396,7 +401,7 @@
 }
 
 - (void)prepareWaypointMission {
-   
+    
     self.mission = [self initializeMission];
     if (self.mission == nil) return; //Initialization failed
     
@@ -437,7 +442,7 @@
 }
 
 - (void)startWaypointMission {
-
+    
     weakSelf(target);
     [[DJIMissionManager sharedInstance] startMissionExecutionWithCompletion:^(NSError * _Nullable error) {
         weakReturn(target);
@@ -446,7 +451,7 @@
             NSLog(@"Start Mission Failed: %@", error.description);
         }
     }];
-   
+    
 }
 
 #pragma mark - Select the lastest photos for Panorama
@@ -494,10 +499,10 @@
     
     DJICamera *camera = [self fetchCamera];
     if (camera == nil) return;
-
+    
     weakSelf(target);
     [camera.playbackManager downloadSelectedFilesWithPreparation:^(NSString * _Nullable fileName, DJIDownloadFileType fileType, NSUInteger fileSize, BOOL * _Nonnull skip) {
-
+        
         totalFileSize=(long)fileSize;
         downloadedFileData=[NSMutableData new];
         targetFileName=fileName;
@@ -508,7 +513,7 @@
             [target.downloadProgressAlert setTitle:[NSString stringWithFormat:@"Download (%d/%d)", finishedFileCount + 1, PHOTO_NUMBER]];
             [target.downloadProgressAlert setMessage:[NSString stringWithFormat:@"FileName:%@ FileSize:%0.1fKB Downloaded:0.0KB", fileName, fileSize / 1024.0]];
         });
-            
+        
     } process:^(NSData * _Nullable data, NSError * _Nullable error) {
         
         weakReturn(target);
@@ -521,7 +526,7 @@
     } fileCompletion:^{
         weakReturn(target);
         finishedFileCount++;
-
+        
         UIImage *downloadPhoto=[UIImage imageWithData:downloadedFileData];
         [target.imageArray addObject:downloadPhoto];
         
@@ -545,10 +550,10 @@
                 if (error) {
                     UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Set CameraMode to ShootPhoto Failed" message:[NSString stringWithFormat:@"%@", error.description] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
                     [alertView show];
-
+                    
                 }
             }];
-
+            
         });
         
     }];
@@ -564,14 +569,14 @@
 #pragma mark - IBAction Methods
 
 -(IBAction)onCaptureButtonClicked:(id)sender {
-
+    
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Select Mode" message:@"" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Rotate Aircraft", @"Rotate Gimbal", @"WaypointMission", nil];
     alertView.tag = kCaptureModeAlertTag;
     [alertView show];
 }
 
 -(IBAction)onDownloadButtonClicked:(id)sender {
-
+    
     weakSelf(target);
     DJICamera *camera = [self fetchCamera];
     [camera setCameraMode:DJICameraModePlayback withCompletion:^(NSError * _Nullable error) {

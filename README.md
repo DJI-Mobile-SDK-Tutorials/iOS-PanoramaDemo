@@ -44,14 +44,18 @@ Import the **DJISDK** and **VideoPreviewer** header files to **CaptureViewContro
 
 ~~~
  
- **4**. In the **viewDidLoad** method, set **fpvPreviewView** instance as a view of **VideoPreviewer** to show the Video Stream, then invoke the **registerApp** method to register the app:
+**4**. In the **viewDidAppear** method, set **fpvPreviewView** instance as a view of **VideoPreviewer** to show the Video Stream, then invoke the **registerApp** method to register the app:
  
 ~~~objc
 - (void)viewDidLoad {
 {
     [super viewDidLoad];
-    
     self.title = @"Panorama Demo";
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
 
     [[VideoPreviewer instance] setView:self.fpvPreviewView];
     [self registerApp];
@@ -469,9 +473,7 @@ Moreover, initialize the **isMissionStarted** and **aircraftLocation** propertie
     
     self.isMissionStarted = NO;
     self.aircraftLocation = kCLLocationCoordinate2DInvalid;
-    
-    [[VideoPreviewer instance] setView:self.fpvPreviewView];
-    [self registerApp];
+ 
 }
 ~~~
 
