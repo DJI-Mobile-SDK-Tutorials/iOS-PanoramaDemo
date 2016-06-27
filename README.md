@@ -1,3 +1,5 @@
+#### This tutorial is now deprecated, please refer to <https://developer.dji.com/mobile-sdk/documentation/ios-tutorials/PanoDemo.html> in DJI Developer Website.
+
 # Creating a Panorama Application
 
 <!-- toc -->
