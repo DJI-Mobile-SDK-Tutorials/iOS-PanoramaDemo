@@ -72,7 +72,7 @@
 
 -(void) componentWithKey:(NSString *)key changedFrom:(DJIBaseComponent *)oldComponent to:(DJIBaseComponent *)newComponent {
     
-    if ([key isEqualToString:DJICameraComponentKey] && newComponent != nil) {
+    if ([key isEqualToString:DJICameraComponent] && newComponent != nil) {
         __weak DJICamera* camera = [self fetchCamera];
         if (camera) {
             [camera setDelegate:self];
