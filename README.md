@@ -8,7 +8,7 @@ From this demo, you will learn how to build a cool panorama app. You will use th
 
  - iOS 8.0+
  - Xcode 7.0+
- - DJI iOS SDK 3.2
+ - DJI iOS SDK 3.3
 
 ## Tutorial
 
