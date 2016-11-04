@@ -57,7 +57,7 @@
 }
 
 - (void) registerApp {
-    NSString *appKey = @"Please enter your App Key here";
+    NSString *appKey = @"Please enter your App Key here.";
     [DJISDKManager registerApp:appKey withDelegate:self];
 }
 
@@ -118,7 +118,7 @@
         NSLog(@"registerAppSuccess");
         
 #if ENTER_DEBUG_MODE
-        [DJISDKManager enterDebugModeWithDebugId:@"192.168.1.109"];
+        [DJISDKManager enterDebugModeWithDebugId:@"10.81.2.28"];
 #else
         [DJISDKManager startConnectionToProduct];
 #endif

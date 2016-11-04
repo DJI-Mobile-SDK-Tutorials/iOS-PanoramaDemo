@@ -7,11 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A433966A1CFF14FA0066F50E /* VideoPreviewer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A43396691CFF14ED0066F50E /* VideoPreviewer.framework */; };
-		A433966B1CFF14FA0066F50E /* VideoPreviewer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A43396691CFF14ED0066F50E /* VideoPreviewer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		A433967B1CFF16070066F50E /* DJISDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A433967A1CFF16070066F50E /* DJISDK.framework */; };
-		A433967C1CFF160F0066F50E /* DJISDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A433967A1CFF16070066F50E /* DJISDK.framework */; };
-		A433967D1CFF160F0066F50E /* DJISDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A433967A1CFF16070066F50E /* DJISDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		236B937ABC1F0E0953105845 /* libPods-PanoDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A539CCE715BBF127E6379E2 /* libPods-PanoDemo.a */; };
+		A419408D1DCB41970076478C /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A419408C1DCB41970076478C /* opencv2.framework */; };
+		A48779061DCB3E7700E48815 /* VideoPreviewer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4E43BBE1DCB3E43002F0B77 /* VideoPreviewer.framework */; };
+		A48779071DCB3E7700E48815 /* VideoPreviewer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A4E43BBE1DCB3E43002F0B77 /* VideoPreviewer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A48F79C51C5F59EF00654B9D /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A48F79C41C5F59EF00654B9D /* libiconv.tbd */; };
 		A48F79C71C5F5A0200654B9D /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A48F79C61C5F5A0100654B9D /* libstdc++.6.0.9.tbd */; };
 		A48F79C91C5F5A1600654B9D /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A48F79C81C5F5A1600654B9D /* libz.tbd */; };
@@ -27,25 +26,23 @@
 		B349F8981B68804A00B5FEA6 /* PanoDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B349F8971B68804A00B5FEA6 /* PanoDemoTests.m */; };
 		B349F8A61B68816600B5FEA6 /* CaptureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B349F8A51B68816600B5FEA6 /* CaptureViewController.m */; };
 		B349F9BC1B69F96700B5FEA6 /* StitchingViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = B349F9BB1B69F96700B5FEA6 /* StitchingViewController.mm */; };
-		B349F9BE1B6A10E200B5FEA6 /* opencv2.framework in Resources */ = {isa = PBXBuildFile; fileRef = B349F9BD1B6A10E200B5FEA6 /* opencv2.framework */; };
-		B349F9BF1B6A11A300B5FEA6 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B349F9BD1B6A10E200B5FEA6 /* opencv2.framework */; };
 		B349F9C11B6A11D800B5FEA6 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B349F9C01B6A11D800B5FEA6 /* AssetsLibrary.framework */; };
 		B349F9C41B6A20B200B5FEA6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B349F9C31B6A20B200B5FEA6 /* CoreGraphics.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		A43396681CFF14ED0066F50E /* PBXContainerItemProxy */ = {
+		A48779081DCB3E7700E48815 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = A43396641CFF14EC0066F50E /* VideoPreviewer.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 02A543FD1C3C51CB0083C11B;
-			remoteInfo = VideoPreviewer;
-		};
-		A433966C1CFF14FA0066F50E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A43396641CFF14EC0066F50E /* VideoPreviewer.xcodeproj */;
+			containerPortal = A4E43BB91DCB3E43002F0B77 /* VideoPreviewer.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = 02A543FC1C3C51CB0083C11B;
+			remoteInfo = VideoPreviewer;
+		};
+		A4E43BBD1DCB3E43002F0B77 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A4E43BB91DCB3E43002F0B77 /* VideoPreviewer.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 02A543FD1C3C51CB0083C11B;
 			remoteInfo = VideoPreviewer;
 		};
 		B349F8921B68804A00B5FEA6 /* PBXContainerItemProxy */ = {
@@ -64,8 +61,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				A433966B1CFF14FA0066F50E /* VideoPreviewer.framework in Embed Frameworks */,
-				A433967D1CFF160F0066F50E /* DJISDK.framework in Embed Frameworks */,
+				A48779071DCB3E7700E48815 /* VideoPreviewer.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -73,11 +69,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		A43396641CFF14EC0066F50E /* VideoPreviewer.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = VideoPreviewer.xcodeproj; path = PanoDemo/Frameworks/VideoPreviewer/VideoPreviewer.xcodeproj; sourceTree = "<group>"; };
-		A433967A1CFF16070066F50E /* DJISDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DJISDK.framework; path = PanoDemo/Frameworks/DJISDK.framework; sourceTree = "<group>"; };
+		0A539CCE715BBF127E6379E2 /* libPods-PanoDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PanoDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		53AA8D6971E22D6F13EBBABB /* Pods-PanoDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PanoDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-PanoDemo/Pods-PanoDemo.release.xcconfig"; sourceTree = "<group>"; };
+		A419408C1DCB41970076478C /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = PanoDemo/Frameworks/opencv2.framework; sourceTree = "<group>"; };
+		A487790B1DCB3EA500E48815 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = PanoDemo/Frameworks/opencv2.framework; sourceTree = "<group>"; };
 		A48F79C41C5F59EF00654B9D /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		A48F79C61C5F5A0100654B9D /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
 		A48F79C81C5F5A1600654B9D /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		A4E43BB91DCB3E43002F0B77 /* VideoPreviewer.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = VideoPreviewer.xcodeproj; path = VideoPreviewer/VideoPreviewer.xcodeproj; sourceTree = "<group>"; };
 		A4FE157D1B8EEF1500C58EB3 /* Cropping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cropping.h; sourceTree = "<group>"; };
 		A4FE157E1B8EEF1500C58EB3 /* Cropping.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Cropping.mm; sourceTree = "<group>"; };
 		A4FE157F1B8EEF1500C58EB3 /* OpenCVConversion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenCVConversion.h; sourceTree = "<group>"; };
@@ -101,10 +100,10 @@
 		B349F8A51B68816600B5FEA6 /* CaptureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaptureViewController.m; sourceTree = "<group>"; };
 		B349F9BA1B69F96700B5FEA6 /* StitchingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StitchingViewController.h; sourceTree = "<group>"; };
 		B349F9BB1B69F96700B5FEA6 /* StitchingViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = StitchingViewController.mm; sourceTree = "<group>"; };
-		B349F9BD1B6A10E200B5FEA6 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
 		B349F9C01B6A11D800B5FEA6 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		B349F9C21B6A121800B5FEA6 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		B349F9C31B6A20B200B5FEA6 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		C55C1714ECC8320A43000A43 /* Pods-PanoDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PanoDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PanoDemo/Pods-PanoDemo.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,13 +113,12 @@
 			files = (
 				A48F79C91C5F5A1600654B9D /* libz.tbd in Frameworks */,
 				A48F79C71C5F5A0200654B9D /* libstdc++.6.0.9.tbd in Frameworks */,
+				A419408D1DCB41970076478C /* opencv2.framework in Frameworks */,
+				A48779061DCB3E7700E48815 /* VideoPreviewer.framework in Frameworks */,
 				A48F79C51C5F59EF00654B9D /* libiconv.tbd in Frameworks */,
-				A433967C1CFF160F0066F50E /* DJISDK.framework in Frameworks */,
 				B349F9C41B6A20B200B5FEA6 /* CoreGraphics.framework in Frameworks */,
-				A433966A1CFF14FA0066F50E /* VideoPreviewer.framework in Frameworks */,
-				A433967B1CFF16070066F50E /* DJISDK.framework in Frameworks */,
 				B349F9C11B6A11D800B5FEA6 /* AssetsLibrary.framework in Frameworks */,
-				B349F9BF1B6A11A300B5FEA6 /* opencv2.framework in Frameworks */,
+				236B937ABC1F0E0953105845 /* libPods-PanoDemo.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -134,10 +132,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		A43396651CFF14EC0066F50E /* Products */ = {
+		34EA4BC2AB689C5868EC60A7 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				A43396691CFF14ED0066F50E /* VideoPreviewer.framework */,
+				C55C1714ECC8320A43000A43 /* Pods-PanoDemo.debug.xcconfig */,
+				53AA8D6971E22D6F13EBBABB /* Pods-PanoDemo.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		A487790A1DCB3EA400E48815 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A487790B1DCB3EA500E48815 /* opencv2.framework */,
+				0A539CCE715BBF127E6379E2 /* libPods-PanoDemo.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A4E43BBA1DCB3E43002F0B77 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A4E43BBE1DCB3E43002F0B77 /* VideoPreviewer.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -163,6 +179,8 @@
 				B349F87A1B68804900B5FEA6 /* PanoDemo */,
 				B349F8941B68804A00B5FEA6 /* PanoDemoTests */,
 				B349F8791B68804900B5FEA6 /* Products */,
+				A487790A1DCB3EA400E48815 /* Frameworks */,
+				34EA4BC2AB689C5868EC60A7 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -184,7 +202,6 @@
 				A4FE157C1B8EEF1500C58EB3 /* Models */,
 				B349F9F41B6B0D0B00B5FEA6 /* ViewControllers */,
 				B349F8AB1B68838500B5FEA6 /* Frameworks */,
-				B349F8B31B68853500B5FEA6 /* ThirdParty */,
 				B349F87B1B68804900B5FEA6 /* Supporting Files */,
 			);
 			path = PanoDemo;
@@ -222,8 +239,8 @@
 		B349F8AB1B68838500B5FEA6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				A433967A1CFF16070066F50E /* DJISDK.framework */,
-				A43396641CFF14EC0066F50E /* VideoPreviewer.xcodeproj */,
+				A419408C1DCB41970076478C /* opencv2.framework */,
+				A4E43BB91DCB3E43002F0B77 /* VideoPreviewer.xcodeproj */,
 				B349F9C31B6A20B200B5FEA6 /* CoreGraphics.framework */,
 				B349F9C01B6A11D800B5FEA6 /* AssetsLibrary.framework */,
 				A48F79C41C5F59EF00654B9D /* libiconv.tbd */,
@@ -232,14 +249,6 @@
 			);
 			name = Frameworks;
 			path = ..;
-			sourceTree = "<group>";
-		};
-		B349F8B31B68853500B5FEA6 /* ThirdParty */ = {
-			isa = PBXGroup;
-			children = (
-				B349F9BD1B6A10E200B5FEA6 /* opencv2.framework */,
-			);
-			name = ThirdParty;
 			sourceTree = "<group>";
 		};
 		B349F9F41B6B0D0B00B5FEA6 /* ViewControllers */ = {
@@ -260,15 +269,18 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B349F89B1B68804A00B5FEA6 /* Build configuration list for PBXNativeTarget "PanoDemo" */;
 			buildPhases = (
+				9B03DBFA44EE7E5CF89E3C8B /* [CP] Check Pods Manifest.lock */,
 				B349F8741B68804900B5FEA6 /* Sources */,
 				B349F8751B68804900B5FEA6 /* Frameworks */,
 				B349F8761B68804900B5FEA6 /* Resources */,
 				A48F79CC1C5F5A3E00654B9D /* Embed Frameworks */,
+				E578A7BF5C045D21C5DDBC52 /* [CP] Embed Pods Frameworks */,
+				18D42C93C3DD38FC0CBE3E99 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				A433966D1CFF14FA0066F50E /* PBXTargetDependency */,
+				A48779091DCB3E7700E48815 /* PBXTargetDependency */,
 			);
 			name = PanoDemo;
 			productName = PanoDemo;
@@ -304,6 +316,7 @@
 				TargetAttributes = {
 					B349F8771B68804900B5FEA6 = {
 						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = 7UL3LRJL93;
 					};
 					B349F8901B68804A00B5FEA6 = {
 						CreatedOnToolsVersion = 6.4;
@@ -324,8 +337,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = A43396651CFF14EC0066F50E /* Products */;
-					ProjectRef = A43396641CFF14EC0066F50E /* VideoPreviewer.xcodeproj */;
+					ProductGroup = A4E43BBA1DCB3E43002F0B77 /* Products */;
+					ProjectRef = A4E43BB91DCB3E43002F0B77 /* VideoPreviewer.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -337,11 +350,11 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		A43396691CFF14ED0066F50E /* VideoPreviewer.framework */ = {
+		A4E43BBE1DCB3E43002F0B77 /* VideoPreviewer.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = VideoPreviewer.framework;
-			remoteRef = A43396681CFF14ED0066F50E /* PBXContainerItemProxy */;
+			remoteRef = A4E43BBD1DCB3E43002F0B77 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -351,7 +364,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B349F9BE1B6A10E200B5FEA6 /* opencv2.framework in Resources */,
 				B349F8871B68804900B5FEA6 /* Main.storyboard in Resources */,
 				B349F88C1B68804900B5FEA6 /* LaunchScreen.xib in Resources */,
 				B349F8891B68804900B5FEA6 /* Images.xcassets in Resources */,
@@ -366,6 +378,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		18D42C93C3DD38FC0CBE3E99 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PanoDemo/Pods-PanoDemo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9B03DBFA44EE7E5CF89E3C8B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		E578A7BF5C045D21C5DDBC52 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PanoDemo/Pods-PanoDemo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B349F8741B68804900B5FEA6 /* Sources */ = {
@@ -394,10 +454,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		A433966D1CFF14FA0066F50E /* PBXTargetDependency */ = {
+		A48779091DCB3E7700E48815 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = VideoPreviewer;
-			targetProxy = A433966C1CFF14FA0066F50E /* PBXContainerItemProxy */;
+			targetProxy = A48779081DCB3E7700E48815 /* PBXContainerItemProxy */;
 		};
 		B349F8931B68804A00B5FEA6 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -510,12 +570,14 @@
 		};
 		B349F89C1B68804A00B5FEA6 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C55C1714ECC8320A43000A43 /* Pods-PanoDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 7UL3LRJL93;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/PanoDemo",
+					"$(PROJECT_DIR)/../VideoPreviewer",
 					"$(PROJECT_DIR)/PanoDemo/Frameworks",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -539,12 +601,14 @@
 		};
 		B349F89D1B68804A00B5FEA6 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 53AA8D6971E22D6F13EBBABB /* Pods-PanoDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 7UL3LRJL93;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/PanoDemo",
+					"$(PROJECT_DIR)/../VideoPreviewer",
 					"$(PROJECT_DIR)/PanoDemo/Frameworks",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
