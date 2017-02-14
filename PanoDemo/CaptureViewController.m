@@ -30,7 +30,7 @@
 @property (nonatomic) bool isMissionStarted;
 @property (atomic) CLLocationCoordinate2D aircraftLocation;
 @property (atomic) double aircraftAltitude;
-@property (atomic) DJIGPSSignalStatus gpsSignalStatus;
+@property (atomic) DJIGPSSignalLevel gpsSignalLevel;
 @property (atomic) double aircraftYaw;
 @property (nonatomic, strong) DJIMission* mission;
 @end
@@ -101,7 +101,8 @@
         [flightController setDelegate:self];
         [flightController setYawControlMode:DJIVirtualStickYawControlModeAngle];
         [flightController setRollPitchCoordinateSystem:DJIVirtualStickFlightCoordinateSystemGround];
-        [flightController enableVirtualStickControlModeWithCompletion:^(NSError * _Nullable error) {
+        
+        [flightController setVirtualStickModeEnabled:YES withCompletion:^(NSError * _Nullable error) {
             if (error) {
                 NSLog(@"Enable VirtualStickControlMode Failed");
             }
@@ -169,13 +170,12 @@
 }
 
 #pragma mark - DJIFlightControllerDelegate Method
-- (void)flightController:(DJIFlightController *)fc didUpdateSystemState:(DJIFlightControllerCurrentState *)state
+- (void)flightController:(DJIFlightController *_Nonnull)fc didUpdateState:(DJIFlightControllerState *_Nonnull)state
 {
     self.aircraftLocation = CLLocationCoordinate2DMake(state.aircraftLocation.latitude, state.aircraftLocation.longitude);
-    self.gpsSignalStatus = state.gpsSignalStatus;
+    self.gpsSignalLevel = state.gpsSignalQualityLevel;
     self.aircraftAltitude = state.altitude;
     self.aircraftYaw = state.attitude.yaw;
-    
 }
 
 #pragma mark Custom Methods
@@ -234,7 +234,7 @@
     weakSelf(target);
     
     DJICamera *camera = [target fetchCamera];
-    [camera setCameraMode:DJICameraModeShootPhoto withCompletion:^(NSError * _Nullable error) {
+    [camera setMode:DJICameraModeShootPhoto withCompletion:^(NSError * _Nullable error) {
         weakReturn(target);
         if (!error) {
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -247,17 +247,17 @@
 
 - (void)executeVirtualStickControl
 {
-    DJICamera *camera = [self fetchCamera];
+    __weak DJICamera *camera = [self fetchCamera];
     
     for(int i = 0;i < PHOTO_NUMBER; i++){
         
         float yawAngle = ROTATE_ANGLE*i;
         
-        if (yawAngle > DJIVirtualStickYawControlMaxAngle) { //Filter the angle between -180 ~ 0, 0 ~ 180
+        if (yawAngle > 180.0) { //Filter the angle between -180 ~ 0, 0 ~ 180
             yawAngle = yawAngle - 360;
         }
         
-        NSTimer *timer =  [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(rotateDrone:) userInfo:@{@"YawAngle":@(yawAngle)} repeats:YES];
+        NSTimer *timer =  [NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(rotateDrone:) userInfo:@{@"YawAngle":@(yawAngle)} repeats:YES];
         [timer fire];
         
         [[NSRunLoop currentRunLoop]addTimer:timer forMode:NSDefaultRunLoopMode];
@@ -266,7 +266,12 @@
         [timer invalidate];
         timer = nil;
         
-        [camera startShootPhoto:DJICameraShootPhotoModeSingle withCompletion:nil];
+        [camera setShootPhotoMode:DJICameraShootPhotoModeSingle withCompletion:^(NSError * _Nullable error) {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [camera startShootPhotoWithCompletion:nil];
+            });
+        }];
+        
         sleep(2);
     }
     
@@ -302,7 +307,7 @@
     
     DJICamera *camera = [self fetchCamera];
     weakSelf(target);
-    [camera setCameraMode:DJICameraModeShootPhoto withCompletion:^(NSError * _Nullable error) {
+    [camera setMode:DJICameraModeShootPhoto withCompletion:^(NSError * _Nullable error) {
         weakReturn(target);
         if (!error) {
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -317,10 +322,10 @@
 {
     
     DJIGimbal *gimbal = [self fetchGimbal];
-    DJICamera *camera = [self fetchCamera];
+    __weak DJICamera *camera = [self fetchCamera];
     
     //Reset Gimbal at the beginning
-    [gimbal resetGimbalWithCompletion:^(NSError * _Nullable error) {
+    [gimbal resetWithCompletion:^(NSError * _Nullable error) {
         if (error) {
             NSLog(@"ResetGimbal Failed: %@", [NSString stringWithFormat:@"%@", error.description]);
         }
@@ -330,24 +335,39 @@
     //rotate the gimbal clockwise
     float yawAngle = 0;
     
-    DJIGimbalAngleRotation pitchRotation = {NO, 0, DJIGimbalRotateDirectionClockwise};
-    DJIGimbalAngleRotation rollRotation = {NO, 0, DJIGimbalRotateDirectionClockwise};
-    DJIGimbalAngleRotation yawRotation = {YES, yawAngle, DJIGimbalRotateDirectionClockwise};
-    
     for(int i = 0; i < PHOTO_NUMBER; i++){
         
-        [camera startShootPhoto:DJICameraShootPhotoModeSingle withCompletion:nil];
+        [camera setShootPhotoMode:DJICameraShootPhotoModeSingle withCompletion:^(NSError * _Nullable error) {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [camera startShootPhotoWithCompletion:nil];
+            });
+        }];
+
         sleep(2);
         
+        NSNumber *pitchRotation = @(0);
+        NSNumber *rollRotation = @(0);
+        NSNumber *yawRotation = @(yawAngle);
+        
         yawAngle += ROTATE_ANGLE;
-        yawRotation.angle = yawAngle;
-        [gimbal rotateGimbalWithAngleMode:DJIGimbalAngleModeAbsoluteAngle pitch:pitchRotation roll:rollRotation yaw:yawRotation withCompletion:^(NSError * _Nullable error) {
+        if (yawAngle > 180.0) { //Filter the angle between -180 ~ 0, 0 ~ 180
+            yawAngle = yawAngle - 360;
+        }
+        yawRotation = @(yawAngle);
+        
+        DJIGimbalRotation *rotation = [DJIGimbalRotation gimbalRotationWithPitchValue:pitchRotation
+                                                                            rollValue:rollRotation
+                                                                             yawValue:yawRotation
+                                                                                 time:1
+                                                                                 mode:DJIGimbalRotationModeAbsoluteAngle];
+        
+        [gimbal rotateWithRotation:rotation completion:^(NSError * _Nullable error) {
             if (error) {
                 NSLog(@"Rotate Gimbal Failed: %@", [NSString stringWithFormat:@"%@", error.description]);
             }
         }];
-        sleep(2);
         
+        sleep(2);
     }
     
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -359,7 +379,7 @@
 #pragma mark - Rotate Drone With Waypoint Mission Methods
 
 - (void)rotateDroneWithWaypointMission {
-    if (CLLocationCoordinate2DIsValid(self.aircraftLocation) && self.gpsSignalStatus != DJIGPSSignalStatusLevel0 && self.gpsSignalStatus != DJIGPSSignalStatusLevel1) {
+    if (CLLocationCoordinate2DIsValid(self.aircraftLocation) && self.gpsSignalLevel != DJIGPSSignalLevel0 && self.gpsSignalLevel != DJIGPSSignalLevel1) {
         [self prepareWaypointMission];
     }
     else {
@@ -468,18 +488,18 @@
         [camera.playbackManager enterMultipleEditMode];
         sleep(1);
         
-        while (self.selectedPhotoNumber != PHOTO_NUMBER) {
+        while (target.selectedPhotoNumber != PHOTO_NUMBER) {
             [camera.playbackManager selectAllFilesInPage];
             sleep(1);
             
-            if(self.selectedPhotoNumber > PHOTO_NUMBER){
-                for(int unselectFileIndex = 0; self.selectedPhotoNumber != PHOTO_NUMBER; unselectFileIndex++){
+            if(target.selectedPhotoNumber > PHOTO_NUMBER){
+                for(int unselectFileIndex = 0; target.selectedPhotoNumber != PHOTO_NUMBER; unselectFileIndex++){
                     [camera.playbackManager toggleFileSelectionAtIndex:unselectFileIndex];
                     sleep(1);
                 }
                 break;
             }
-            else if(self.selectedPhotoNumber < PHOTO_NUMBER) {
+            else if(target.selectedPhotoNumber < PHOTO_NUMBER) {
                 [camera.playbackManager goToPreviousMultiplePreviewPage];
                 sleep(1);
             }
@@ -546,7 +566,7 @@
             }
             
             DJICamera *camera = [target fetchCamera];
-            [camera setCameraMode:DJICameraModeShootPhoto withCompletion:^(NSError * _Nullable error) {
+            [camera setMode:DJICameraModeShootPhoto withCompletion:^(NSError * _Nullable error) {
                 if (error) {
                     UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Set CameraMode to ShootPhoto Failed" message:[NSString stringWithFormat:@"%@", error.description] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
                     [alertView show];
@@ -579,7 +599,7 @@
     
     weakSelf(target);
     DJICamera *camera = [self fetchCamera];
-    [camera setCameraMode:DJICameraModePlayback withCompletion:^(NSError * _Nullable error) {
+    [camera setMode:DJICameraModePlayback withCompletion:^(NSError * _Nullable error) {
         weakReturn(target);
         
         if (error) {
