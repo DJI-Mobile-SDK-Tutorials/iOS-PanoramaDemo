@@ -23,7 +23,6 @@
 		B349F8871B68804900B5FEA6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B349F8851B68804900B5FEA6 /* Main.storyboard */; };
 		B349F8891B68804900B5FEA6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B349F8881B68804900B5FEA6 /* Images.xcassets */; };
 		B349F88C1B68804900B5FEA6 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B349F88A1B68804900B5FEA6 /* LaunchScreen.xib */; };
-		B349F8981B68804A00B5FEA6 /* PanoDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B349F8971B68804A00B5FEA6 /* PanoDemoTests.m */; };
 		B349F8A61B68816600B5FEA6 /* CaptureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B349F8A51B68816600B5FEA6 /* CaptureViewController.m */; };
 		B349F9BC1B69F96700B5FEA6 /* StitchingViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = B349F9BB1B69F96700B5FEA6 /* StitchingViewController.mm */; };
 		B349F9C11B6A11D800B5FEA6 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B349F9C01B6A11D800B5FEA6 /* AssetsLibrary.framework */; };
@@ -44,13 +43,6 @@
 			proxyType = 2;
 			remoteGlobalIDString = 02A543FD1C3C51CB0083C11B;
 			remoteInfo = VideoPreviewer;
-		};
-		B349F8921B68804A00B5FEA6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B349F8701B68804900B5FEA6 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = B349F8771B68804900B5FEA6;
-			remoteInfo = PanoDemo;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -93,7 +85,6 @@
 		B349F8861B68804900B5FEA6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B349F8881B68804900B5FEA6 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		B349F88B1B68804900B5FEA6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		B349F8911B68804A00B5FEA6 /* PanoDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PanoDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B349F8961B68804A00B5FEA6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B349F8971B68804A00B5FEA6 /* PanoDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PanoDemoTests.m; sourceTree = "<group>"; };
 		B349F8A41B68816600B5FEA6 /* CaptureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaptureViewController.h; sourceTree = "<group>"; };
@@ -119,13 +110,6 @@
 				B349F9C41B6A20B200B5FEA6 /* CoreGraphics.framework in Frameworks */,
 				B349F9C11B6A11D800B5FEA6 /* AssetsLibrary.framework in Frameworks */,
 				236B937ABC1F0E0953105845 /* libPods-PanoDemo.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B349F88E1B68804A00B5FEA6 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -188,7 +172,6 @@
 			isa = PBXGroup;
 			children = (
 				B349F8781B68804900B5FEA6 /* PanoDemo.app */,
-				B349F8911B68804A00B5FEA6 /* PanoDemoTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -287,24 +270,6 @@
 			productReference = B349F8781B68804900B5FEA6 /* PanoDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
-		B349F8901B68804A00B5FEA6 /* PanoDemoTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = B349F89E1B68804A00B5FEA6 /* Build configuration list for PBXNativeTarget "PanoDemoTests" */;
-			buildPhases = (
-				B349F88D1B68804A00B5FEA6 /* Sources */,
-				B349F88E1B68804A00B5FEA6 /* Frameworks */,
-				B349F88F1B68804A00B5FEA6 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				B349F8931B68804A00B5FEA6 /* PBXTargetDependency */,
-			);
-			name = PanoDemoTests;
-			productName = PanoDemoTests;
-			productReference = B349F8911B68804A00B5FEA6 /* PanoDemoTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -316,11 +281,6 @@
 				TargetAttributes = {
 					B349F8771B68804900B5FEA6 = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = 7UL3LRJL93;
-					};
-					B349F8901B68804A00B5FEA6 = {
-						CreatedOnToolsVersion = 6.4;
-						TestTargetID = B349F8771B68804900B5FEA6;
 					};
 				};
 			};
@@ -344,7 +304,6 @@
 			projectRoot = "";
 			targets = (
 				B349F8771B68804900B5FEA6 /* PanoDemo */,
-				B349F8901B68804A00B5FEA6 /* PanoDemoTests */,
 			);
 		};
 /* End PBXProject section */
@@ -367,13 +326,6 @@
 				B349F8871B68804900B5FEA6 /* Main.storyboard in Resources */,
 				B349F88C1B68804900B5FEA6 /* LaunchScreen.xib in Resources */,
 				B349F8891B68804900B5FEA6 /* Images.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B349F88F1B68804A00B5FEA6 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -407,7 +359,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		E578A7BF5C045D21C5DDBC52 /* [CP] Embed Pods Frameworks */ = {
@@ -443,14 +395,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B349F88D1B68804A00B5FEA6 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B349F8981B68804A00B5FEA6 /* PanoDemoTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -458,11 +402,6 @@
 			isa = PBXTargetDependency;
 			name = VideoPreviewer;
 			targetProxy = A48779081DCB3E7700E48815 /* PBXContainerItemProxy */;
-		};
-		B349F8931B68804A00B5FEA6 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = B349F8771B68804900B5FEA6 /* PanoDemo */;
-			targetProxy = B349F8921B68804A00B5FEA6 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -573,7 +512,7 @@
 			baseConfigurationReference = C55C1714ECC8320A43000A43 /* Pods-PanoDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 7UL3LRJL93;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -604,7 +543,7 @@
 			baseConfigurationReference = 53AA8D6971E22D6F13EBBABB /* Pods-PanoDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 7UL3LRJL93;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -630,40 +569,6 @@
 			};
 			name = Release;
 		};
-		B349F89F1B68804A00B5FEA6 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = PanoDemoTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PanoDemo.app/PanoDemo";
-			};
-			name = Debug;
-		};
-		B349F8A01B68804A00B5FEA6 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = PanoDemoTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PanoDemo.app/PanoDemo";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -681,15 +586,6 @@
 			buildConfigurations = (
 				B349F89C1B68804A00B5FEA6 /* Debug */,
 				B349F89D1B68804A00B5FEA6 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		B349F89E1B68804A00B5FEA6 /* Build configuration list for PBXNativeTarget "PanoDemoTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				B349F89F1B68804A00B5FEA6 /* Debug */,
-				B349F8A01B68804A00B5FEA6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
