@@ -1,7 +1,5 @@
 # iOS-PanoramaDemo
 
-> **Note: This Sample Project is developed based on iOS SDK v3.5.1, an update version for iOS SDK v4.0 will be published soon.**
-
 ## Introduction
 
 From this demo, you will learn how to build a cool panorama app. You will use the Waypoint feature of Intelligent Navigation and Virtual Stick to rotate the aircraft to take photos and use OpenCV to stitch and crop photos into a panorama.
