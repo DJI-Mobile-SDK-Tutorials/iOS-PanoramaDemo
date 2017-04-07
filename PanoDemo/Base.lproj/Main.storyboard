@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="F5E-Vz-n1R">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="F5E-Vz-n1R">
+    <device id="ipad9_7" orientation="landscape">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Capture View Controller-->
@@ -14,54 +18,54 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FmD-2g-uiC">
-                                <rect key="frame" x="132" y="77" width="101" height="42"/>
+                                <rect key="frame" x="294" y="155" width="101" height="42"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="mrt-Ra-FQf"/>
                                     <constraint firstAttribute="width" constant="101" id="qfo-Pz-XQq"/>
                                 </constraints>
                                 <state key="normal" title="Capture" backgroundImage="btn">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="onCaptureButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="L8h-Vm-iXu"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hUb-u1-Wwn">
-                                <rect key="frame" x="253" y="77" width="96" height="42"/>
+                                <rect key="frame" x="465" y="155" width="96" height="42"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="96" id="OGx-5C-piS"/>
                                     <constraint firstAttribute="height" constant="42" id="lVg-3F-FB4"/>
                                 </constraints>
                                 <state key="normal" title="Download" backgroundImage="btn">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="onDownloadButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="RWW-Fp-hHI"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="luc-AT-VNw">
-                                <rect key="frame" x="371" y="77" width="96" height="42"/>
+                                <rect key="frame" x="632" y="155" width="96" height="42"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="96" id="G96-a0-vJy"/>
                                     <constraint firstAttribute="height" constant="42" id="PV4-7c-Xd1"/>
                                 </constraints>
                                 <state key="normal" title="Stitch" backgroundImage="btn">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <segue destination="HXZ-11-iEw" kind="show" identifier="Stitching" id="4RK-J4-7xe"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uTK-dR-UVx">
-                                <rect key="frame" x="20" y="136" width="560" height="444"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <rect key="frame" x="132" y="220" width="760" height="444"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="444" id="9R7-On-b70">
-                                        <variation key="heightClass=compact" constant="242"/>
+                                        <variation key="heightClass=compact" constant="183"/>
                                     </constraint>
                                     <constraint firstAttribute="height" constant="444" id="Gkp-kG-iwZ">
                                         <variation key="heightClass=compact-widthClass=regular" constant="245"/>
@@ -69,7 +73,7 @@
                                     <constraint firstAttribute="width" constant="760" id="ZEw-hW-aOw">
                                         <variation key="heightClass=compact-widthClass=regular" constant="684"/>
                                     </constraint>
-                                    <constraint firstAttribute="width" constant="560" id="a98-2t-eXN">
+                                    <constraint firstAttribute="width" constant="528" id="a98-2t-eXN">
                                         <variation key="widthClass=regular" constant="760"/>
                                     </constraint>
                                 </constraints>
@@ -89,7 +93,7 @@
                                 </variation>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="uTK-dR-UVx" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="5Wj-I3-iCL">
                                 <variation key="widthClass=regular" constant="0.0"/>
@@ -101,10 +105,10 @@
                                 <variation key="heightClass=compact-widthClass=regular" constant="61.5"/>
                             </constraint>
                             <constraint firstItem="uTK-dR-UVx" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="58" id="Npp-Pq-NuZ">
-                                <variation key="heightClass=compact" constant="59"/>
+                                <variation key="heightClass=compact" constant="53.5"/>
                             </constraint>
                             <constraint firstItem="luc-AT-VNw" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-202" id="P1o-vf-lpo">
-                                <variation key="heightClass=compact" constant="-97"/>
+                                <variation key="heightClass=compact" constant="-67.5"/>
                                 <variation key="widthClass=regular" constant="-208"/>
                                 <variation key="heightClass=compact-widthClass=regular" constant="-97"/>
                             </constraint>
@@ -115,12 +119,12 @@
                                 <variation key="widthClass=regular" constant="-167.5"/>
                             </constraint>
                             <constraint firstItem="FmD-2g-uiC" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-202" id="qg9-nk-pk9">
-                                <variation key="heightClass=compact" constant="-97"/>
+                                <variation key="heightClass=compact" constant="-67.5"/>
                                 <variation key="widthClass=regular" constant="-208"/>
                                 <variation key="heightClass=compact-widthClass=regular" constant="-97"/>
                             </constraint>
                             <constraint firstItem="hUb-u1-Wwn" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-202" id="w8p-mE-m1W">
-                                <variation key="heightClass=compact" constant="-97"/>
+                                <variation key="heightClass=compact" constant="-67.5"/>
                                 <variation key="widthClass=regular" constant="-208"/>
                                 <variation key="heightClass=compact-widthClass=regular" constant="-97"/>
                             </constraint>
@@ -150,7 +154,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2055.75" y="-771"/>
+            <point key="canvasLocation" x="2054.296875" y="-772.65625"/>
         </scene>
         <!--Stitching View Controller-->
         <scene sceneID="HGA-LZ-duD">
@@ -161,37 +165,37 @@
                         <viewControllerLayoutGuide type="bottom" id="NCq-LQ-b0d"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="iKZ-Lx-VHb">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9U5-x7-2Yb">
-                                <rect key="frame" x="16" y="72" width="568" height="508"/>
+                                <rect key="frame" x="132" y="156" width="760" height="508"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="508" id="cWt-rn-afb">
-                                        <variation key="heightClass=compact" constant="320"/>
+                                        <variation key="heightClass=compact" constant="221"/>
                                     </constraint>
-                                    <constraint firstAttribute="width" constant="568" id="zod-J8-13V">
+                                    <constraint firstAttribute="width" constant="528" id="zod-J8-13V">
                                         <variation key="widthClass=regular" constant="760"/>
                                     </constraint>
                                 </constraints>
                             </imageView>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="8gg-bm-DXF">
-                                <rect key="frame" x="290" y="290" width="20" height="20"/>
+                                <rect key="frame" x="499.5" y="400" width="20" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="TfN-Js-T6k"/>
                                     <constraint firstAttribute="width" constant="20" id="uI1-ba-GQp"/>
                                 </constraints>
                             </activityIndicatorView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="9U5-x7-2Yb" firstAttribute="centerX" secondItem="iKZ-Lx-VHb" secondAttribute="centerX" id="1wm-o7-2kh"/>
                             <constraint firstItem="9U5-x7-2Yb" firstAttribute="centerY" secondItem="iKZ-Lx-VHb" secondAttribute="centerY" constant="26" id="DjZ-50-yJv">
-                                <variation key="heightClass=compact" constant="32"/>
+                                <variation key="heightClass=compact" constant="30"/>
                             </constraint>
-                            <constraint firstItem="8gg-bm-DXF" firstAttribute="centerX" secondItem="iKZ-Lx-VHb" secondAttribute="centerX" id="GZy-uU-UaF"/>
+                            <constraint firstItem="8gg-bm-DXF" firstAttribute="centerX" secondItem="iKZ-Lx-VHb" secondAttribute="centerX" constant="-2.5" id="GZy-uU-UaF"/>
                             <constraint firstItem="8gg-bm-DXF" firstAttribute="centerY" secondItem="iKZ-Lx-VHb" secondAttribute="centerY" id="roW-Fu-Kjo">
-                                <variation key="heightClass=compact" constant="32"/>
+                                <variation key="heightClass=compact" constant="29.5"/>
                                 <variation key="widthClass=regular" constant="26"/>
                             </constraint>
                         </constraints>
@@ -203,7 +207,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gRO-mW-rQM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3022" y="-771"/>
+            <point key="canvasLocation" x="3021.1267605633802" y="-772.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="odO-qp-sVW">
