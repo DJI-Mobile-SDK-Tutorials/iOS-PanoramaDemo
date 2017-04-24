@@ -63,7 +63,6 @@
 - (void)productConnected:(DJIBaseProduct *)product
 {
     if (product) {
-        [product setDelegate:self];
         DJICamera* camera = [self fetchCamera];
         if (camera != nil) {
             camera.delegate = self;
