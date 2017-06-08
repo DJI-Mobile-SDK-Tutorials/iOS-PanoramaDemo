@@ -92,10 +92,14 @@
 #endif
         [[DJISDKManager videoFeeder].primaryVideoFeed addListener:self withQueue:nil];
         [[VideoPreviewer instance] start];
+
+        weakSelf(target);
+        [[DJISDKManager missionControl].activeTrackMissionOperator addListenerToEvents:self withQueue:dispatch_get_main_queue() andBlock:^(DJIActiveTrackMissionEvent * _Nonnull event) {
+            [target.gestureModeSwitch setOn:[DJISDKManager missionControl].activeTrackMissionOperator.isGestureModeEnabled];
+        }];
     }
     
     [self showAlertViewWithTitle:@"Register App" withMessage:message];
-    
 }
 
 #pragma mark - DJIVideoFeedListener
@@ -168,48 +172,51 @@
 
 #pragma mark - Rotate Drone With Joystick Methods
 - (void)rotateDroneWithJoystick {
-    
+    [self setCameraModeToShootPhoto];
+}
+
+-(void)setCameraModeToShootPhoto {
     weakSelf(target);
-    
     DJICamera *camera = [target fetchCamera];
     [camera getModeWithCompletion:^(DJICameraMode mode, NSError * _Nullable error) {
-        if (!error) {
+        if (error == nil) {
             if (mode == DJICameraModeShootPhoto) {
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                    [target executeVirtualStickControl];
-                });
+                [target enableVirtualStick];
             }
             else {
                 [camera setMode:DJICameraModeShootPhoto withCompletion:^(NSError * _Nullable error) {
                     weakReturn(target);
-                    if (!error) {
-                        DJIFlightController *flightController = [target fetchFlightController];
-                        [flightController setYawControlMode:DJIVirtualStickYawControlModeAngle];
-                        [flightController setRollPitchCoordinateSystem:DJIVirtualStickFlightCoordinateSystemGround];
-                        [flightController setVirtualStickModeEnabled:YES withCompletion:^(NSError * _Nullable error) {
-                            if (error) {
-                                NSLog(@"Enable VirtualStickControlMode Failed");
-                            }
-                            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                                [target executeVirtualStickControl];
-                            });
-                        }];
+                    if (error == nil) {
+                        [target enableVirtualStick];
                     }
                 }];
             }
         }
     }];
+}
 
+-(void)enableVirtualStick {
+    DJIFlightController *flightController = [self fetchFlightController];
+    [flightController setYawControlMode:DJIVirtualStickYawControlModeAngle];
+    [flightController setRollPitchCoordinateSystem:DJIVirtualStickFlightCoordinateSystemGround];
+    [flightController setVirtualStickModeEnabled:YES withCompletion:^(NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"Enable VirtualStickControlMode Failed");
+        }
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            [self executeVirtualStickControl];
+        });
+    }];
 }
 
 - (void)executeVirtualStickControl
 {
     __weak DJICamera *camera = [self fetchCamera];
-    
+
     for(int i = 0;i < PHOTO_NUMBER; i++){
-        
+
         float yawAngle = ROTATE_ANGLE*i;
-        
+
         if (yawAngle > 180.0) { //Filter the angle between -180 ~ 0, 0 ~ 180
             yawAngle = yawAngle - 360;
         }
@@ -705,6 +712,14 @@
             }
         }];
     }
+}
+
+- (IBAction)onGestureModeSwitchValueChanged:(id)sender {
+    [[DJISDKManager missionControl].activeTrackMissionOperator setGestureModeEnabled:self.gestureModeSwitch.on withCompletion:^(NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"Set Gesture mode enabled failed");
+        }
+    }];
 }
 
 #pragma mark UIAlertView Delegate Methods

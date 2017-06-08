@@ -14,8 +14,10 @@
 @property (strong, nonatomic) IBOutlet UIButton *captureBtn;
 @property (strong, nonatomic) IBOutlet UIButton *downloadBtn;
 @property (weak, nonatomic) IBOutlet UIButton *stitchBtn;
+@property (weak, nonatomic) IBOutlet UISwitch *gestureModeSwitch;
 
 - (IBAction)onCaptureButtonClicked:(id)sender;
 - (IBAction)onDownloadButtonClicked:(id)sender;
+- (IBAction)onGestureModeSwitchValueChanged:(id)sender;
 
 @end
