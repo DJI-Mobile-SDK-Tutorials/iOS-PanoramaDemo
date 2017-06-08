@@ -10,15 +10,25 @@
 #import "StitchingWrapper.h"
 #import "OpenCVConversion.h"
 
-#define COMPRESS_RATIO 0.2
+#define HIGHT_COMPRESS_RATIO 0.2
+#define LOW_COMPRESS_RATIO 1.0
 
 @implementation Stitching
 
 + (bool) stitchImageWithArray:(NSMutableArray*)imageArray andResult:(cv::Mat &) result {
-    
+    if (imageArray == nil || imageArray.count == 0) {
+        return false;
+    }
+
+    float ratio = HIGHT_COMPRESS_RATIO;
+    UIImage *image = [imageArray firstObject];
+    if (image.size.height < 1000) {
+        ratio = LOW_COMPRESS_RATIO;
+    }
+
     NSMutableArray* compressedImageArray =[NSMutableArray new];
     for(UIImage *rawImage in imageArray){
-        UIImage *compressedImage=[self compressedToRatio:rawImage ratio:COMPRESS_RATIO];
+        UIImage *compressedImage=[self compressedToRatio:rawImage ratio:ratio];
         [compressedImageArray addObject:compressedImage];
     }
     [imageArray removeAllObjects];
