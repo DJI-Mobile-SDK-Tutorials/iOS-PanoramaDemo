@@ -93,10 +93,6 @@
         [[DJISDKManager videoFeeder].primaryVideoFeed addListener:self withQueue:nil];
         [[VideoPreviewer instance] start];
 
-        weakSelf(target);
-        [[DJISDKManager missionControl].activeTrackMissionOperator addListenerToEvents:self withQueue:dispatch_get_main_queue() andBlock:^(DJIActiveTrackMissionEvent * _Nonnull event) {
-            [target.gestureModeSwitch setOn:[DJISDKManager missionControl].activeTrackMissionOperator.isGestureModeEnabled];
-        }];
     }
     
     [self showAlertViewWithTitle:@"Register App" withMessage:message];
@@ -172,7 +168,21 @@
 
 #pragma mark - Rotate Drone With Joystick Methods
 - (void)rotateDroneWithJoystick {
-    [self setCameraModeToShootPhoto];
+    
+    if([[DJISDKManager product].model isEqual: DJIAircraftModelNameSpark])
+    {
+        weakSelf(target);
+        [[DJISDKManager missionControl].activeTrackMissionOperator setGestureModeEnabled:NO withCompletion:^(NSError * _Nullable error) {
+            weakReturn(target);
+            if (error) {
+                NSLog(@"Set Gesture mode enabled failed");
+            }else{
+                [target setCameraModeToShootPhoto];
+            }
+        }];
+    }else{
+        [self setCameraModeToShootPhoto];
+    }
 }
 
 -(void)setCameraModeToShootPhoto {
@@ -230,11 +240,7 @@
         [timer invalidate];
         timer = nil;
         
-        [camera setShootPhotoMode:DJICameraShootPhotoModeSingle withCompletion:^(NSError * _Nullable error) {
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [camera startShootPhotoWithCompletion:nil];
-            });
-        }];
+        [camera startShootPhotoWithCompletion:nil];
         
         sleep(2);
     }
@@ -624,7 +630,7 @@
         return;
     }
 
-    [camera.mediaManager.fileTaskScheduler resumeWithCompletion:^(NSError * _Nullable error) {
+    [camera.mediaManager.taskScheduler resumeWithCompletion:^(NSError * _Nullable error) {
         if (error) {
             [self.downloadProgressAlert dismissWithClickedButtonIndex:0 animated:YES];
             self.downloadProgressAlert = nil;
@@ -639,7 +645,8 @@
     weakSelf(target);
     for (int i = (int)files.count - PHOTO_NUMBER; i < files.count; i++) {
         DJIMediaFile *file = files[i];
-        DJIMediaFileTask *task = [DJIMediaFileTask taskWithFile:file option:DJIMediaFileTaskOptionPreview andCompletion:^(DJIMediaFile * _Nonnull file, DJIMediaFileTaskOption option, NSError * _Nullable error) {
+        
+        DJIFetchMediaTask *task = [DJIFetchMediaTask taskWithFile:file content:DJIFetchMediaTaskContentPreview andCompletion:^(DJIMediaFile * _Nonnull file, DJIFetchMediaTaskContent content, NSError * _Nullable error) {
             weakReturn(target);
             if (error) {
                 [target.downloadProgressAlert dismissWithClickedButtonIndex:0 animated:YES];
@@ -648,7 +655,7 @@
                 [alertView show];
             }
             else {
-                [target.imageArray addObject:file.previewImage];
+                [target.imageArray addObject:file.preview];
                 finishedFileCount++;
                 [target.downloadProgressAlert setMessage:[NSString stringWithFormat:@"Download (%d/%d)", finishedFileCount, PHOTO_NUMBER]];
 
@@ -667,7 +674,7 @@
                 }
             }
         }];
-        [camera.mediaManager.fileTaskScheduler pushBackTask:task];
+        [camera.mediaManager.taskScheduler moveTaskToEnd:task];
     }
 }
 
@@ -712,14 +719,6 @@
             }
         }];
     }
-}
-
-- (IBAction)onGestureModeSwitchValueChanged:(id)sender {
-    [[DJISDKManager missionControl].activeTrackMissionOperator setGestureModeEnabled:self.gestureModeSwitch.on withCompletion:^(NSError * _Nullable error) {
-        if (error) {
-            NSLog(@"Set Gesture mode enabled failed");
-        }
-    }];
 }
 
 #pragma mark UIAlertView Delegate Methods
