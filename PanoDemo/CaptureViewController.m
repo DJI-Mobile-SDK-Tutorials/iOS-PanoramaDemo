@@ -31,6 +31,7 @@
 @property (atomic) double aircraftAltitude;
 @property (atomic) DJIGPSSignalLevel gpsSignalLevel;
 @property (atomic) double aircraftYaw;
+
 @end
 
 @implementation CaptureViewController
@@ -73,14 +74,6 @@
     DJIFlightController *flightController = [self fetchFlightController];
     if (flightController) {
         [flightController setDelegate:self];
-        [flightController setYawControlMode:DJIVirtualStickYawControlModeAngle];
-        [flightController setRollPitchCoordinateSystem:DJIVirtualStickFlightCoordinateSystemGround];
-        
-        [flightController setVirtualStickModeEnabled:YES withCompletion:^(NSError * _Nullable error) {
-            if (error) {
-                NSLog(@"Enable VirtualStickControlMode Failed");
-            }
-        }];
     }
 }
 
@@ -99,10 +92,14 @@
 #endif
         [[DJISDKManager videoFeeder].primaryVideoFeed addListener:self withQueue:nil];
         [[VideoPreviewer instance] start];
+
+        weakSelf(target);
+        [[DJISDKManager missionControl].activeTrackMissionOperator addListenerToEvents:self withQueue:dispatch_get_main_queue() andBlock:^(DJIActiveTrackMissionEvent * _Nonnull event) {
+            [target.gestureModeSwitch setOn:[DJISDKManager missionControl].activeTrackMissionOperator.isGestureModeEnabled];
+        }];
     }
     
     [self showAlertViewWithTitle:@"Register App" withMessage:message];
-    
 }
 
 #pragma mark - DJIVideoFeedListener
@@ -153,20 +150,15 @@
     if (![DJISDKManager product]) {
         return nil;
     }
-    if ([[DJISDKManager product] isKindOfClass:[DJIAircraft class]]) {
-        return ((DJIAircraft*)[DJISDKManager product]).camera;
-    }
-    return nil;
+
+    return [DJISDKManager product].camera;
 }
 
 - (DJIGimbal*) fetchGimbal {
     if (![DJISDKManager product]) {
         return nil;
     }
-    if ([[DJISDKManager product] isKindOfClass:[DJIAircraft class]]) {
-        return ((DJIAircraft*)[DJISDKManager product]).gimbal;
-    }
-    return nil;
+    return [DJISDKManager product].gimbal;
 }
 
 - (void)showAlertViewWithTitle:(NSString *)title withMessage:(NSString *)message
@@ -180,29 +172,51 @@
 
 #pragma mark - Rotate Drone With Joystick Methods
 - (void)rotateDroneWithJoystick {
-    
+    [self setCameraModeToShootPhoto];
+}
+
+-(void)setCameraModeToShootPhoto {
     weakSelf(target);
-    
     DJICamera *camera = [target fetchCamera];
-    [camera setMode:DJICameraModeShootPhoto withCompletion:^(NSError * _Nullable error) {
-        weakReturn(target);
-        if (!error) {
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                [target executeVirtualStickControl];
-            });
+    [camera getModeWithCompletion:^(DJICameraMode mode, NSError * _Nullable error) {
+        if (error == nil) {
+            if (mode == DJICameraModeShootPhoto) {
+                [target enableVirtualStick];
+            }
+            else {
+                [camera setMode:DJICameraModeShootPhoto withCompletion:^(NSError * _Nullable error) {
+                    weakReturn(target);
+                    if (error == nil) {
+                        [target enableVirtualStick];
+                    }
+                }];
+            }
         }
     }];
-    
+}
+
+-(void)enableVirtualStick {
+    DJIFlightController *flightController = [self fetchFlightController];
+    [flightController setYawControlMode:DJIVirtualStickYawControlModeAngle];
+    [flightController setRollPitchCoordinateSystem:DJIVirtualStickFlightCoordinateSystemGround];
+    [flightController setVirtualStickModeEnabled:YES withCompletion:^(NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"Enable VirtualStickControlMode Failed");
+        }
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            [self executeVirtualStickControl];
+        });
+    }];
 }
 
 - (void)executeVirtualStickControl
 {
     __weak DJICamera *camera = [self fetchCamera];
-    
+
     for(int i = 0;i < PHOTO_NUMBER; i++){
-        
+
         float yawAngle = ROTATE_ANGLE*i;
-        
+
         if (yawAngle > 180.0) { //Filter the angle between -180 ~ 0, 0 ~ 180
             yawAngle = yawAngle - 360;
         }
@@ -224,13 +238,21 @@
         
         sleep(2);
     }
-    
+
+    DJIFlightController *flightController = [self fetchFlightController];
+    [flightController setVirtualStickModeEnabled:NO withCompletion:^(NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"Disable VirtualStickControlMode Failed");
+            DJIFlightController *flightController = [self fetchFlightController];
+            [flightController setVirtualStickModeEnabled:NO withCompletion:nil];
+        }
+    }];
+
     weakSelf(target);
     dispatch_async(dispatch_get_main_queue(), ^{
         weakReturn(target);
         [target showAlertViewWithTitle:@"Capture Photos" withMessage:@"Capture finished"];
     });
-    
 }
 
 - (void)rotateDrone:(NSTimer *)timer
@@ -245,6 +267,8 @@
     vsFlightCtrlData.roll = 0;
     vsFlightCtrlData.verticalThrottle = 0;
     vsFlightCtrlData.yaw = yawAngle;
+
+    flightController.isVirtualStickAdvancedModeEnabled = YES;
     
     [flightController sendVirtualStickFlightControlData:vsFlightCtrlData withCompletion:^(NSError * _Nullable error) {
         if (error) {
@@ -314,9 +338,6 @@
                                                                                  mode:DJIGimbalRotationModeAbsoluteAngle];
         
         [gimbal rotateWithRotation:rotation completion:^(NSError * _Nullable error) {
-            if (error) {
-                NSLog(@"Rotate Gimbal Failed: %@", [NSString stringWithFormat:@"%@", error.description]);
-            }
         }];
         
         sleep(2);
@@ -465,7 +486,7 @@
 
 #pragma mark - Select the lastest photos for Panorama
 
--(void)selectPhotos {
+-(void)selectPhotosForPlaybackMode {
     
     weakSelf(target);
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -493,12 +514,12 @@
                 sleep(1);
             }
         }
-        [target downloadPhotos];
+        [target downloadPhotosForPlaybackMode];
     });
 }
 
 #pragma mark - Download the selected photos
--(void)downloadPhotos {
+-(void)downloadPhotosForPlaybackMode {
     __block int finishedFileCount = 0;
     __block NSMutableData* downloadedFileData;
     __block long totalFileSize;
@@ -568,6 +589,88 @@
     }];
 }
 
+-(void)loadMediaListsForMediaDownloadMode {
+    DJICamera *camera = [self fetchCamera];
+    [self showDownloadProgressAlert];
+    [self.downloadProgressAlert setTitle:[NSString stringWithFormat:@"Refreshing file list. "]];
+    [self.downloadProgressAlert setMessage:[NSString stringWithFormat:@"Loading..."]];
+
+    weakSelf(target);
+    [camera.mediaManager refreshFileListWithCompletion:^(NSError * _Nullable error) {
+        weakReturn(target);
+        if (error) {
+            [target.downloadProgressAlert dismissWithClickedButtonIndex:0 animated:YES];
+            target.downloadProgressAlert = nil;
+            NSLog(@"Refresh file list failed: %@", error.description);
+        }
+        else {
+            [target downloadPhotosForMediaDownloadMode];
+        }
+    }];
+}
+
+-(void)downloadPhotosForMediaDownloadMode {
+    __block int finishedFileCount = 0;
+
+    self.imageArray=[NSMutableArray new];
+
+    DJICamera *camera = [self fetchCamera];
+    NSArray<DJIMediaFile *> *files = [camera.mediaManager fileListSnapshot];
+    if (files.count < PHOTO_NUMBER) {
+        [self.downloadProgressAlert dismissWithClickedButtonIndex:0 animated:YES];
+        self.downloadProgressAlert = nil;
+        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Download failed" message:[NSString stringWithFormat:@"Not enough photos are taken. "] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alertView show];
+        return;
+    }
+
+    [camera.mediaManager.fileTaskScheduler resumeWithCompletion:^(NSError * _Nullable error) {
+        if (error) {
+            [self.downloadProgressAlert dismissWithClickedButtonIndex:0 animated:YES];
+            self.downloadProgressAlert = nil;
+            UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Download failed" message:[NSString stringWithFormat:@"Resume file task scheduler failed. "] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alertView show];
+        }
+    }];
+
+    [self.downloadProgressAlert setTitle:[NSString stringWithFormat:@"Downloading..."]];
+    [self.downloadProgressAlert setMessage:[NSString stringWithFormat:@"Download (%d/%d)", 0, PHOTO_NUMBER]];
+
+    weakSelf(target);
+    for (int i = (int)files.count - PHOTO_NUMBER; i < files.count; i++) {
+        DJIMediaFile *file = files[i];
+        DJIMediaFileTask *task = [DJIMediaFileTask taskWithFile:file option:DJIMediaFileTaskOptionPreview andCompletion:^(DJIMediaFile * _Nonnull file, DJIMediaFileTaskOption option, NSError * _Nullable error) {
+            weakReturn(target);
+            if (error) {
+                [target.downloadProgressAlert dismissWithClickedButtonIndex:0 animated:YES];
+                target.downloadProgressAlert = nil;
+                UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Download failed" message:[NSString stringWithFormat:@"Download file %@ failed. ", file.fileName] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                [alertView show];
+            }
+            else {
+                [target.imageArray addObject:file.previewImage];
+                finishedFileCount++;
+                [target.downloadProgressAlert setMessage:[NSString stringWithFormat:@"Download (%d/%d)", finishedFileCount, PHOTO_NUMBER]];
+
+                if (finishedFileCount == PHOTO_NUMBER) {
+
+                    [target.downloadProgressAlert dismissWithClickedButtonIndex:0 animated:YES];
+                    target.downloadProgressAlert = nil;
+                    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Download Complete" message:[NSString stringWithFormat:@"%d files have been downloaded. ", PHOTO_NUMBER] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                    [alertView show];
+                    [camera setMode:DJICameraModeShootPhoto withCompletion:^(NSError * _Nullable error) {
+                        if (error) {
+                            UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Set CameraMode to ShootPhoto Failed" message:[NSString stringWithFormat:@"%@", error.description] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                            [alertView show];
+                        }
+                    }];
+                }
+            }
+        }];
+        [camera.mediaManager.fileTaskScheduler pushBackTask:task];
+    }
+}
+
 -(void) showDownloadProgressAlert {
     if (self.downloadProgressAlert == nil) {
         self.downloadProgressAlert = [[UIAlertView alloc] initWithTitle:@"" message:@"" delegate:nil cancelButtonTitle:nil otherButtonTitles:nil];
@@ -588,13 +691,33 @@
     
     weakSelf(target);
     DJICamera *camera = [self fetchCamera];
-    [camera setMode:DJICameraModePlayback withCompletion:^(NSError * _Nullable error) {
-        weakReturn(target);
-        
+    if (camera.isPlaybackSupported) {
+        [camera setMode:DJICameraModePlayback withCompletion:^(NSError * _Nullable error) {
+            weakReturn(target);
+
+            if (error) {
+                NSLog(@"Enter playback mode failed: %@", error.description);
+            }else {
+                [target selectPhotosForPlaybackMode];
+            }
+        }];
+    }
+    else if (camera.isMediaDownloadModeSupported) {
+        [camera setMode:DJICameraModeMediaDownload withCompletion:^(NSError * _Nullable error) {
+            weakReturn(target);
+            if (error) {
+                NSLog(@"Enter Media Download mode failed: %@", error.description);
+            } else {
+                [target loadMediaListsForMediaDownloadMode];
+            }
+        }];
+    }
+}
+
+- (IBAction)onGestureModeSwitchValueChanged:(id)sender {
+    [[DJISDKManager missionControl].activeTrackMissionOperator setGestureModeEnabled:self.gestureModeSwitch.on withCompletion:^(NSError * _Nullable error) {
         if (error) {
-            NSLog(@"Enter playback mode failed: %@", error.description);
-        }else {
-            [target selectPhotos];
+            NSLog(@"Set Gesture mode enabled failed");
         }
     }];
 }
