@@ -8,17 +8,7 @@ From this demo, you will learn how to build a cool panorama app. You will use th
 
  - iOS 9.0+
  - Xcode 8.0+
- - DJI iOS SDK 4.1.1
-
-## Not Supported DJI Products
-
- - OSMO
- - Phantom 3 Standard
- - Phantom 3 4K
- - Phantom 3 Advanced
- - Mavic Pro
- - Phantom 4 Pro
- - Inspire 2
+ - DJI iOS SDK 4.2
 
 ## SDK Installation with CocoaPods
 
@@ -47,7 +37,7 @@ If you install it successfully, you should get the messages similar to the follo
 ~~~
 Analyzing dependencies
 Downloading dependencies
-Installing DJI-SDK-iOS (4.1.1)
+Installing DJI-SDK-iOS (4.2)
 Generating Pods project
 Integrating client project
 
