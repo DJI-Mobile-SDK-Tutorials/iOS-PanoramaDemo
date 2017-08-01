@@ -281,6 +281,7 @@
 				TargetAttributes = {
 					B349F8771B68804900B5FEA6 = {
 						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = 7UL3LRJL93;
 					};
 				};
 			};
@@ -512,7 +513,7 @@
 			baseConfigurationReference = C55C1714ECC8320A43000A43 /* Pods-PanoDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 7UL3LRJL93;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -533,7 +534,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/VideoPreviewer/VideoPreviewer/ffmpeg/lib\"",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.dji.panoDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dji.panoDemo1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -543,7 +544,7 @@
 			baseConfigurationReference = 53AA8D6971E22D6F13EBBABB /* Pods-PanoDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 7UL3LRJL93;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -564,7 +565,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/VideoPreviewer/VideoPreviewer/ffmpeg/lib\"",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.dji.panoDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dji.panoDemo1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
