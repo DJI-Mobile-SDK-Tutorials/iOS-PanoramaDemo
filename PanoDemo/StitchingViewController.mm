@@ -17,10 +17,11 @@
     [super viewDidLoad];
     
     __weak StitchingViewController *weakSelf = self;
+    __weak NSMutableArray *weakImageArray = self.imageArray;
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         cv::Mat stitchMat;
-        if(![Stitching stitchImageWithArray:_imageArray andResult:stitchMat]) {
+        if(![Stitching stitchImageWithArray:weakImageArray andResult:stitchMat]) {
             [weakSelf showAlertWithTitle:@"Stitching" andMessage:@"Stitching failed"];
             return;
         }
