@@ -610,7 +610,7 @@
     [self.downloadProgressAlert setMessage:[NSString stringWithFormat:@"Loading..."]];
 
     weakSelf(target);
-    [camera.mediaManager refreshFileListWithCompletion:^(NSError * _Nullable error) {
+    [camera.mediaManager refreshFileListOfStorageLocation:DJICameraStorageLocationSDCard withCompletion:^(NSError * _Nullable error) {
         weakReturn(target);
         if (error) {
             [target.downloadProgressAlert dismissWithClickedButtonIndex:0 animated:YES];
@@ -629,7 +629,7 @@
     self.imageArray=[NSMutableArray new];
 
     DJICamera *camera = [self fetchCamera];
-    NSArray<DJIMediaFile *> *files = [camera.mediaManager fileListSnapshot];
+    NSArray<DJIMediaFile *> *files = [camera.mediaManager sdCardFileListSnapshot];
     if (files.count < PHOTO_NUMBER) {
         [self.downloadProgressAlert dismissWithClickedButtonIndex:0 animated:YES];
         self.downloadProgressAlert = nil;
