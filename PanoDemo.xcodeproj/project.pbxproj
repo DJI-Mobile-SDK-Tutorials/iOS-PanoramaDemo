@@ -9,8 +9,10 @@
 /* Begin PBXBuildFile section */
 		236B937ABC1F0E0953105845 /* libPods-PanoDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A539CCE715BBF127E6379E2 /* libPods-PanoDemo.a */; };
 		A419408D1DCB41970076478C /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A419408C1DCB41970076478C /* opencv2.framework */; };
-		A48779061DCB3E7700E48815 /* VideoPreviewer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4E43BBE1DCB3E43002F0B77 /* VideoPreviewer.framework */; };
-		A48779071DCB3E7700E48815 /* VideoPreviewer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A4E43BBE1DCB3E43002F0B77 /* VideoPreviewer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A46985B021343CA6001A1F08 /* DJIWidget.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A46985AF21343C97001A1F08 /* DJIWidget.framework */; };
+		A46985B121343CA6001A1F08 /* DJIWidget.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A46985AF21343C97001A1F08 /* DJIWidget.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A46985B521343CB0001A1F08 /* FFmpeg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A46985B421343CAF001A1F08 /* FFmpeg.framework */; };
+		A46985B621343CB0001A1F08 /* FFmpeg.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A46985B421343CAF001A1F08 /* FFmpeg.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A48F79C51C5F59EF00654B9D /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A48F79C41C5F59EF00654B9D /* libiconv.tbd */; };
 		A48F79C71C5F5A0200654B9D /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A48F79C61C5F5A0100654B9D /* libstdc++.6.0.9.tbd */; };
 		A48F79C91C5F5A1600654B9D /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A48F79C81C5F5A1600654B9D /* libz.tbd */; };
@@ -30,19 +32,19 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		A48779081DCB3E7700E48815 /* PBXContainerItemProxy */ = {
+		A46985AE21343C97001A1F08 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = A4E43BB91DCB3E43002F0B77 /* VideoPreviewer.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 02A543FC1C3C51CB0083C11B;
-			remoteInfo = VideoPreviewer;
-		};
-		A4E43BBD1DCB3E43002F0B77 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A4E43BB91DCB3E43002F0B77 /* VideoPreviewer.xcodeproj */;
+			containerPortal = A46985AA21343C96001A1F08 /* DJIWidget.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 02A543FD1C3C51CB0083C11B;
-			remoteInfo = VideoPreviewer;
+			remoteGlobalIDString = 2E54A2CD1F4A904000916B4D;
+			remoteInfo = DJIWidget;
+		};
+		A46985B221343CA6001A1F08 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A46985AA21343C96001A1F08 /* DJIWidget.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 2E54A2CC1F4A904000916B4D;
+			remoteInfo = DJIWidget;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -53,7 +55,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				A48779071DCB3E7700E48815 /* VideoPreviewer.framework in Embed Frameworks */,
+				A46985B121343CA6001A1F08 /* DJIWidget.framework in Embed Frameworks */,
+				A46985B621343CB0001A1F08 /* FFmpeg.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -64,11 +67,12 @@
 		0A539CCE715BBF127E6379E2 /* libPods-PanoDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PanoDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		53AA8D6971E22D6F13EBBABB /* Pods-PanoDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PanoDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-PanoDemo/Pods-PanoDemo.release.xcconfig"; sourceTree = "<group>"; };
 		A419408C1DCB41970076478C /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = PanoDemo/Frameworks/opencv2.framework; sourceTree = "<group>"; };
+		A46985AA21343C96001A1F08 /* DJIWidget.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DJIWidget.xcodeproj; path = DJIWidget/DJIWidget.xcodeproj; sourceTree = "<group>"; };
+		A46985B421343CAF001A1F08 /* FFmpeg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FFmpeg.framework; path = DJIWidget/FFmpeg/FFmpeg.framework; sourceTree = "<group>"; };
 		A487790B1DCB3EA500E48815 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = PanoDemo/Frameworks/opencv2.framework; sourceTree = "<group>"; };
 		A48F79C41C5F59EF00654B9D /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		A48F79C61C5F5A0100654B9D /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
 		A48F79C81C5F5A1600654B9D /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
-		A4E43BB91DCB3E43002F0B77 /* VideoPreviewer.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = VideoPreviewer.xcodeproj; path = VideoPreviewer/VideoPreviewer.xcodeproj; sourceTree = "<group>"; };
 		A4FE157D1B8EEF1500C58EB3 /* Cropping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cropping.h; sourceTree = "<group>"; };
 		A4FE157E1B8EEF1500C58EB3 /* Cropping.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Cropping.mm; sourceTree = "<group>"; };
 		A4FE157F1B8EEF1500C58EB3 /* OpenCVConversion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenCVConversion.h; sourceTree = "<group>"; };
@@ -104,8 +108,9 @@
 			files = (
 				A48F79C91C5F5A1600654B9D /* libz.tbd in Frameworks */,
 				A48F79C71C5F5A0200654B9D /* libstdc++.6.0.9.tbd in Frameworks */,
+				A46985B521343CB0001A1F08 /* FFmpeg.framework in Frameworks */,
+				A46985B021343CA6001A1F08 /* DJIWidget.framework in Frameworks */,
 				A419408D1DCB41970076478C /* opencv2.framework in Frameworks */,
-				A48779061DCB3E7700E48815 /* VideoPreviewer.framework in Frameworks */,
 				A48F79C51C5F59EF00654B9D /* libiconv.tbd in Frameworks */,
 				B349F9C41B6A20B200B5FEA6 /* CoreGraphics.framework in Frameworks */,
 				B349F9C11B6A11D800B5FEA6 /* AssetsLibrary.framework in Frameworks */,
@@ -125,21 +130,22 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		A46985AB21343C96001A1F08 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A46985AF21343C97001A1F08 /* DJIWidget.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		A487790A1DCB3EA400E48815 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A46985AA21343C96001A1F08 /* DJIWidget.xcodeproj */,
 				A487790B1DCB3EA500E48815 /* opencv2.framework */,
 				0A539CCE715BBF127E6379E2 /* libPods-PanoDemo.a */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		A4E43BBA1DCB3E43002F0B77 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				A4E43BBE1DCB3E43002F0B77 /* VideoPreviewer.framework */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		A4FE157C1B8EEF1500C58EB3 /* Models */ = {
@@ -160,6 +166,7 @@
 		B349F86F1B68804900B5FEA6 = {
 			isa = PBXGroup;
 			children = (
+				A46985B421343CAF001A1F08 /* FFmpeg.framework */,
 				B349F87A1B68804900B5FEA6 /* PanoDemo */,
 				B349F8941B68804A00B5FEA6 /* PanoDemoTests */,
 				B349F8791B68804900B5FEA6 /* Products */,
@@ -223,7 +230,6 @@
 			isa = PBXGroup;
 			children = (
 				A419408C1DCB41970076478C /* opencv2.framework */,
-				A4E43BB91DCB3E43002F0B77 /* VideoPreviewer.xcodeproj */,
 				B349F9C31B6A20B200B5FEA6 /* CoreGraphics.framework */,
 				B349F9C01B6A11D800B5FEA6 /* AssetsLibrary.framework */,
 				A48F79C41C5F59EF00654B9D /* libiconv.tbd */,
@@ -263,7 +269,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				A48779091DCB3E7700E48815 /* PBXTargetDependency */,
+				A46985B321343CA6001A1F08 /* PBXTargetDependency */,
 			);
 			name = PanoDemo;
 			productName = PanoDemo;
@@ -298,8 +304,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = A4E43BBA1DCB3E43002F0B77 /* Products */;
-					ProjectRef = A4E43BB91DCB3E43002F0B77 /* VideoPreviewer.xcodeproj */;
+					ProductGroup = A46985AB21343C96001A1F08 /* Products */;
+					ProjectRef = A46985AA21343C96001A1F08 /* DJIWidget.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -310,11 +316,11 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		A4E43BBE1DCB3E43002F0B77 /* VideoPreviewer.framework */ = {
+		A46985AF21343C97001A1F08 /* DJIWidget.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
-			path = VideoPreviewer.framework;
-			remoteRef = A4E43BBD1DCB3E43002F0B77 /* PBXContainerItemProxy */;
+			path = DJIWidget.framework;
+			remoteRef = A46985AE21343C97001A1F08 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -399,10 +405,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		A48779091DCB3E7700E48815 /* PBXTargetDependency */ = {
+		A46985B321343CA6001A1F08 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = VideoPreviewer;
-			targetProxy = A48779081DCB3E7700E48815 /* PBXContainerItemProxy */;
+			name = DJIWidget;
+			targetProxy = A46985B221343CA6001A1F08 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -518,7 +524,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/PanoDemo/Frameworks\"",
-					"\"$(SRCROOT)/VideoPreviewer\"",
+					"$(PROJECT_DIR)/DJIWidget/FFmpeg",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/PanoDemo/PrefixHeader.pch";
@@ -549,7 +555,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/PanoDemo/Frameworks\"",
-					"\"$(SRCROOT)/VideoPreviewer\"",
+					"$(PROJECT_DIR)/DJIWidget/FFmpeg",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/PanoDemo/PrefixHeader.pch";

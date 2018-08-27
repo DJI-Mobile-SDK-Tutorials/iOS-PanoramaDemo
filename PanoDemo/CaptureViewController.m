@@ -8,7 +8,7 @@
 
 #import "CaptureViewController.h"
 #import <DJISDK/DJISDK.h>
-#import <VideoPreviewer/VideoPreviewer.h>
+#import <DJIWidget/DJIVideoPreviewer.h>
 
 #define PHOTO_NUMBER 8
 #define ROTATE_ANGLE 45
@@ -43,7 +43,7 @@
     
     self.title = @"Panorama Demo";
     self.aircraftLocation = kCLLocationCoordinate2DInvalid;
-    [[VideoPreviewer instance] setView:self.fpvPreviewView];
+    [[DJIVideoPreviewer instance] setView:self.fpvPreviewView];
     [self registerApp];
 
 }
@@ -99,7 +99,7 @@
         [DJISDKManager startConnectionToProduct];
 #endif
         [[DJISDKManager videoFeeder].primaryVideoFeed addListener:self withQueue:nil];
-        [[VideoPreviewer instance] start];
+        [[DJIVideoPreviewer instance] start];
 
     }
     
@@ -108,7 +108,7 @@
 
 #pragma mark - DJIVideoFeedListener
 -(void)videoFeed:(DJIVideoFeed *)videoFeed didUpdateVideoData:(NSData *)videoData {
-    [[VideoPreviewer instance] push:(uint8_t *)videoData.bytes length:(int)videoData.length];
+    [[DJIVideoPreviewer instance] push:(uint8_t *)videoData.bytes length:(int)videoData.length];
 }
 
 #pragma mark - DJIPlaybackDelegate
@@ -130,7 +130,7 @@
 #pragma mark Custom Methods
 
 - (void)cleanVideoPreview {
-    [[VideoPreviewer instance] setView:nil];
+    [[DJIVideoPreviewer instance] setView:nil];
     [[DJISDKManager videoFeeder].primaryVideoFeed removeListener:self];
 
     if (self.fpvPreviewView != nil) {
