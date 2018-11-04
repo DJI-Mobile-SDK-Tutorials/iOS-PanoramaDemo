@@ -272,13 +272,12 @@ DJIVideoDataFrameControlDelegate>{
 
 static DJIVideoPreviewer* previewer = nil;
 
-+(DJIVideoPreviewer*) instance
++ (instancetype)instance
 {
-    if(previewer == nil)
-    {
+    if(previewer == nil) {
         @synchronized (self) {
             if (previewer == nil) {
-                previewer = [[DJIVideoPreviewer alloc] init];
+                previewer = [[self alloc] init];
                 previewer.isDefaultPreviewer = YES;
             }
         }
@@ -416,12 +415,10 @@ static DJIVideoPreviewer* previewer = nil;
     BEGIN_MAIN_DISPATCH_QUEUE
     if(_glView != nil && _glView.superview !=nil)
     {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [_glView removeFromSuperview];
-            //_glView = nil; // Deliberately not release dglView, Avoid each entry view flickering。
-            _status.isGLViewInit = NO;
-            self.internalGLView = nil;
-        });
+		[_glView removeFromSuperview];
+		//_glView = nil; // Deliberately not release dglView, Avoid each entry view flickering。
+		_status.isGLViewInit = NO;
+		self.internalGLView = nil;
     }
     END_DISPATCH_QUEUE
 }
